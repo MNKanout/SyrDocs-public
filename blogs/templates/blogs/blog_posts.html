@@ -1,17 +1,37 @@
 {% extends 'blogs/base.html' %}
+
+{% block page_header %}
+<title>Blog posts</title>
+<div class="container-lg">
+    <div class="row">
+        <div class="col">
+            <h2 class="text-primary">Blog posts</h2>
+        </div>
+        <div class="col-mr-auto">
+    <h3><a class="btn btn-primary btn-md"
+       href="{% url 'blogs:new_blog' %}">Add a new post</a></h3>
+        </div>
+    </div>
+</div>
+{% endblock page_header %}
+
 {% block content %}
-<p>Blogs</p>
-<p><a href="{% url 'blogs:new_blog' %}">Add a new blog</a></p>
-<ul>
+<ul class="navbar-nav">
     {% for blog in blogs %}
-        <li>
-        <p>Blog title:{{blog.title}}</p><p>{{blog.date_added}}</p>
-        <p>{{blog.text}}</p>
-        <p>{{blog.id}}
-        <a href="{% url 'blogs:edit_blog' blog.id %}">Edit blog post</a>
+    <div class="bg-light pd-2 mb-4">
+        <li class="nav-item">
+            <h4>{{blog.title.title}}</h4>
+            <p>{{blog.date_added}} By {{blog.owner}}</p>
+            <span class="navbar-text">{{blog.text}}</span>
+            {% if blog.owner == user %}
+            <a class="btn btn-sm btn-info"
+                href="{% url 'blogs:edit_blog' blog.id %}">Edit blog post</a>
+            {% endif %}
         </li>
+    </div>
     {% empty %}
-        <p>No blogs were add</p>
+    <p>No blogs were add</p>
     {% endfor %}
 </ul>
+
 {% endblock content %}

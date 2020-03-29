@@ -1,9 +1,16 @@
 {% extends 'blogs/base.html' %}
-{% block content %}
-<form action="{% url 'blogs:edit_blog' blog_id %}" method="POST">
-    {% csrf_token %}
-    {{form.as_p}}
-    <button name="submit">Apply changes</button>
-</form>
+{% load bootstrap4 %}
 
+{%block page_header%}
+<title>Edit {{blog_post}}</title>
+<h3>{{blog_post.title}}</h3>
+{% endblock page_header %}
+
+{% block content %}
+<form class="form-group" method="post"
+      action="{% url 'blogs:edit_blog' blog_id %}">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <button class="btn btn-primary btn-md" type="submit">Apply changes</button>
+</form>
 {% endblock content %}
