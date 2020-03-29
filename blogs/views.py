@@ -16,7 +16,8 @@ def index(request):
 def blog_posts(request):
     """Show all blog posts"""
     blogs = BlogPost.objects.all()
-    context = {'blogs':blogs}
+    user = request.user
+    context = {'blogs':blogs,'user':user}
     return render(request,'blogs/blog_posts.html',context)
 
 @login_required
@@ -27,7 +28,9 @@ def new_blog(request):
     else:
         form = BlogPostform(data=request.POST)
         if form.is_valid():
-            form.save()
+            new_blog = form.save(commit=False)
+            new_blog.owner = request.user
+            new_blog.save()
             return redirect('blogs:blog_posts')
     #Display a blank form
     context = {'form':form}
@@ -46,6 +49,6 @@ def edit_blog(request,blog_id):
             form.save()
             return redirect('blogs:blog_posts')
     #Display an empty page
-    context = {'form':form,'blog_id':blog_id}
+    context = {'form':form,'blog_id':blog_id,'blog_post':blog_post}
     return render(request,'blogs/edit_blog.html',context)
 
