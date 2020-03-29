@@ -1,7 +1,13 @@
 {% extends 'blogs/base.html' %}
-{% block content %}
-<h1>Blog Homepage</h1>
-<p>This is all about making blog posts</p>
+{% block page_header %}
+<div class="jumbotron">
+    <h1>DjangoBlog</h1>
+    <p>DjangoBlog is a blogging website that been written in Python
+    using the Django framwork. It shares some basic functionality,
+    such as creating a new user, creating new posts, editing existing posts
+    , and some other under the hood functions.</p>
+    <a class="btn btn-danger btn-lg" role= "button"
+    href="{% url 'blogs:new_blog' %}">Write your new blog now</a>
 
-{% endblock content %}
-
+</div>
+{% endblock page_header %}
