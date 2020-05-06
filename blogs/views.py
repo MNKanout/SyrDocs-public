@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
 from  django.contrib.auth.decorators import login_required
 from django.http import Http404
+from django.shortcuts import get_object_or_404
 
 from .models import BlogPost
 from .forms import BlogPostform
 
-def check_blog_owner(request,blog):
+def check_owner(request,blog):
     if blog.owner != request.user:
         raise Http404
 
@@ -40,15 +41,38 @@ def new_blog(request):
 def edit_blog(request,blog_id):
     """Editing existing blog posts"""
     blog_post = BlogPost.objects.get(id=blog_id)
-    check_blog_owner(request,blog_post)
+    check_owner(request,blog_post)
     if request.method != 'POST':
         form = BlogPostform(instance=blog_post)
-    else:
+
+    else:   #POST
         form = BlogPostform(instance=blog_post,data=request.POST)
-        if form.is_valid():
-            form.save()
+        if request.POST.get('edit'): #If edit button is clicked.
+            if form.is_valid():
+                form.save()
+                return redirect('blogs:blog_posts')
+
+        elif request.POST.get('del'):#If delete button is clicked.
+            blog_post.delete()
             return redirect('blogs:blog_posts')
+
     #Display an empty page
     context = {'form':form,'blog_id':blog_id,'blog_post':blog_post}
     return render(request,'blogs/edit_blog.html',context)
 
+
+
+@login_required
+def del_post(request,blog_id):
+    """Delete a spesifc post"""
+    blog_post = BlogPost.objects.get(id=blog_id)
+    check_owner(request,blog_post)
+    if request.method != 'POST':
+        form = BlogPostform(instance=blog_post)
+    else:
+        form = BlogPostform(instance=blog_post,data=request.POST)
+        blog_post.delete()
+        return redirect('blogs:blog_posts')
+    #Display an empty page
+    context = {'form':form,'blog_id':blog_id,'blog_post':blog_post}
+    return render(request,'blogs/del_post.html',context)

@@ -26,6 +26,8 @@
             {% if blog.owner == user %}
             <a class="btn btn-sm btn-info"
                 href="{% url 'blogs:edit_blog' blog.id %}">Edit blog post</a>
+            <a class="btn btn-sm btn-danger" 
+                href="{% url 'blogs:del_post' blog.id %}">Delete post</a>
             {% endif %}
         </li>
     </div>

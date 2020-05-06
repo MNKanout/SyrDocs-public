@@ -25,7 +25,7 @@ SECRET_KEY = 't3%h*sd(u_^_sew5=loz@y=_wef^+3j(qykcefq0q1q@%&^%#^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['peaceful-earth-01773.herokuapp.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
