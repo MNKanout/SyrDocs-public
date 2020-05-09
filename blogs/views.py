@@ -14,12 +14,27 @@ def index(request):
     """Showing the homepage"""
     return render(request,'blogs/index.html')
 
-def blog_posts(request):
+def blog_posts(request,):
     """Show all blog posts"""
-    blogs = BlogPost.objects.all()
-    user = request.user
-    context = {'blogs':blogs,'user':user}
-    return render(request,'blogs/blog_posts.html',context)
+    print(request.GET.get)
+    if request.GET.get('newest'):
+        blogs = BlogPost.objects.all().order_by('date_added')
+        user = request.user
+        context = {'blogs':blogs,'user':user}
+        return render(request,'blogs/blog_posts.html',context)
+
+    elif request.GET.get('oldest'):
+        blogs = BlogPost.objects.all().order_by('-date_added')
+        user = request.user
+        context = {'blogs':blogs,'user':user}
+        return render(request,'blogs/blog_posts.html',context)
+
+    else:
+        blogs = BlogPost.objects.all().order_by('date_added')
+        user = request.user
+        context = {'blogs':blogs,'user':user}
+        return render(request,'blogs/blog_posts.html',context)
+
 
 @login_required
 def new_blog(request):
