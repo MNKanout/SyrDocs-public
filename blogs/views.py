@@ -62,14 +62,18 @@ def edit_blog(request,blog_id):
 
     else:   #POST
         form = BlogPostform(instance=blog_post,data=request.POST)
-        if request.POST.get('edit'): #If edit button is clicked.
+        if request.POST.get('edit'): # Save and return to posts page.
             if form.is_valid():
                 form.save()
                 return redirect('blogs:blog_posts')
 
-        elif request.POST.get('del'):#If delete button is clicked.
+        elif request.POST.get('del'):# Delete selected post.
             blog_post.delete()
             return redirect('blogs:blog_posts')
+        
+        elif request.POST.get('save'): # Save changes
+            if form.is_valid():
+                form.save()
 
     #Display an empty page
     context = {'form':form,'blog_id':blog_id,'blog_post':blog_post}
