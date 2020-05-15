@@ -140,3 +140,6 @@ dmypy.json
 cython_debug/
 
 .vscode/
+backup.json
+sqlite3.db
+win-venv/
