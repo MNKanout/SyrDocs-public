@@ -11,6 +11,13 @@
       action="{% url 'blogs:edit_blog' blog_id %}">
     {% csrf_token %}
     {% bootstrap_form form %}
-    <button class="btn btn-primary btn-md" type="submit">Apply changes</button>
+    <button class="btn btn-primary btn-md" 
+      type="submit" name="edit" value="post">Save and Return</button>
+    <button class="btn btn-success btn-md"
+      type="submit" name='save' value="post">Save changes</button>
+    <button class="btn btn-danger btn-md" 
+      type="submit" name="del" value="post">Delete post</button>
+    
+
 </form>
 {% endblock content %}

@@ -1,11 +1,19 @@
+<<<<<<< HEAD
+=======
+# Mac
+.DS_Store
+>>>>>>> 457b9298beaea9e3042dfe2439eea9366babcbe9
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
 
+<<<<<<< HEAD
 #backups
 backup.json
 
+=======
+>>>>>>> 457b9298beaea9e3042dfe2439eea9366babcbe9
 # C extensions
 *.so
 
@@ -140,3 +148,10 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
+<<<<<<< HEAD
+=======
+.vscode/
+backup.json
+sqlite3.db
+win-venv/
+>>>>>>> 457b9298beaea9e3042dfe2439eea9366babcbe9

@@ -16,18 +16,50 @@
 {% endblock page_header %}
 
 {% block content %}
+<div class="container">
+    <div class="row justify-content-md-right">
+        <div class="col">
+            <p>Sort by:</p>
+        </div>
+        <div class="col">
+            <form method="GET" action="{% url 'blogs:blog_posts' %}">
+                <button class="btn btn-sm text-info" type="submit" 
+                    name="oldest" value="post">newst</button>
+                <button class="btn btn-sm text-info" type="submit" 
+                    name="newest" value="post">oldest</button>
+            </form>
+        </div>
+    </div>
+</div>
 <ul class="navbar-nav">
     {% for blog in blogs %}
-    <div class="bg-light pd-2 mb-4">
-        <li class="nav-item">
-            <h4>{{blog.title.title}}</h4>
-            <p>{{blog.date_added}} By {{blog.owner}}</p>
-            <span class="navbar-text">{{blog.text}}</span>
-            {% if blog.owner == user %}
-            <a class="btn btn-sm btn-info"
-                href="{% url 'blogs:edit_blog' blog.id %}">Edit blog post</a>
-            {% endif %}
-        </li>
+    <div class="container bg-light pd-2 mb-4">
+        <div class="row">
+            <div class="col">
+                <li class="nav-item">
+                    <h4>{{blog.title.title}}</h4>
+             </div>
+        </div>
+         <div class="row">
+             <div class="col">
+                <p>{{blog.date_added}} By {{blog.owner}}</p>
+                <p class="navbar-text">{{blog.text}}</p>
+            </div>
+        </div> 
+        <div class="row">
+            <div class="col">
+               {% if blog.owner == user %}
+                <a class="btn btn-sm btn-info"
+                    href="{% url 'blogs:edit_blog' blog.id %}">
+                    Edit blog post</a>
+
+                <a class="btn btn-sm btn-danger" 
+                    href="{% url 'blogs:del_post' blog.id %}">
+                    Delete post</a>
+                {% endif %}
+                </li>
+            </div>
+        </div>
     </div>
     {% empty %}
     <p>No blogs were add</p>
