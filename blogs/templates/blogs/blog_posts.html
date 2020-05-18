@@ -43,7 +43,7 @@
          <div class="row">
              <div class="col">
                 <p>{{blog.date_added}} By {{blog.owner}}</p>
-                <p class="navbar-text">{{blog.text}}</p>
+                <p class="navbar-text">{{blog.text | safe}}</p>
             </div>
         </div> 
         <div class="row">

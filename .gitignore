@@ -143,3 +143,4 @@ cython_debug/
 backup.json
 sqlite3.db
 win-venv/
+migrations
