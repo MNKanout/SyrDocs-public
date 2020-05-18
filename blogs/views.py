@@ -16,7 +16,6 @@ def index(request):
 
 def blog_posts(request,):
     """Show all blog posts"""
-    print(request.GET.get)
     if request.GET.get('newest'):
         blogs = BlogPost.objects.all().order_by('date_added')
         user = request.user
@@ -30,7 +29,7 @@ def blog_posts(request,):
         return render(request,'blogs/blog_posts.html',context)
 
     else:
-        blogs = BlogPost.objects.all().order_by('date_added')
+        blogs = BlogPost.objects.all().order_by('-date_added')
         user = request.user
         context = {'blogs':blogs,'user':user}
         return render(request,'blogs/blog_posts.html',context)

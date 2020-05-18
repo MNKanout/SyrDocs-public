@@ -30,7 +30,7 @@ if debug == 'True':
 else:
     DEBUG = False
 
-ALLOWED_HOSTS = ['syrwegian.com']
+ALLOWED_HOSTS = ['syrwegian.com','localhost']
 
 
 # Application definition
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     #Thirdparty apps
     'bootstrap4',
+    'tinymce',
 
     #Default apps
     'django.contrib.admin',

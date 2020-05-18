@@ -8,7 +8,8 @@
 {% block content %}
 <form class="form-group" action="{% url 'blogs:new_blog' %}" method="post">
     {% csrf_token %}
-    {% bootstrap_form form %}
+    {{ form.media }}
+    {% bootstrap_form form %}  
     <button class="btn btn-primary btn-md" name="submit"
     type="submit">Add post</button>
 </form>
