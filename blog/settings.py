@@ -29,7 +29,7 @@ if debug == 'True':
 else:
     DEBUG = False
 
-ALLOWED_HOSTS = ['syrwegian.com']
+ALLOWED_HOSTS = ['syrwegian.com','localhost']
 
 
 # Application definition
