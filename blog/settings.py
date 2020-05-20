@@ -32,9 +32,16 @@ else:
 
 ALLOWED_HOSTS = ['syrwegian.com','45.132.241.24']
 
+# CKeditor settings
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'disableNativeSpellChecker' : False,
+    },
+}
+
 
 # Application definition
-
 INSTALLED_APPS = [
     #My apps
     'blogs',
@@ -42,7 +49,7 @@ INSTALLED_APPS = [
 
     #Thirdparty apps
     'bootstrap4',
-    'tinymce',
+    'ckeditor',
 
     #Default apps
     'django.contrib.admin',
