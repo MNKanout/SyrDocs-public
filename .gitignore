@@ -154,4 +154,4 @@ cython_debug/
 backup.json
 sqlite3.db
 win-venv/
->>>>>>> 457b9298beaea9e3042dfe2439eea9366babcbe9
+image.json
