@@ -37,6 +37,7 @@ ALLOWED_HOSTS = ['syrwegian.com','45.132.241.24']
 CKEDITOR_CONFIGS = {
     'default': {
         'disableNativeSpellChecker' : False,
+        "removePlugins": "contextMenu",
     },
 }
 
