@@ -1,0 +1,9 @@
+{% extends 'blogs/base.html' %}
+
+{% block page_header %}
+<h3>{{blog_post.title}}</h3>
+{% endblock page_header %}
+
+{% block content %}
+<p>{{blog_post.text | safe}}</p>
+{% endblock content %}

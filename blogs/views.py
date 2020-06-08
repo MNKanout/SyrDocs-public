@@ -34,6 +34,11 @@ def blog_posts(request,):
         context = {'blogs':blogs,'user':user}
         return render(request,'blogs/blog_posts.html',context)
 
+def blog_post(request,post_pk):
+    "Show blog post"
+    blog_post = get_object_or_404(BlogPost,pk=post_pk)
+    context = {'blog_post':blog_post}
+    return render(request,'blogs/blog_post.html',context)
 
 @login_required
 def new_blog(request):
