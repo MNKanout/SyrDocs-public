@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     #My apps
     'blogs',
     'users',
+    'dictionaries',
 
     #Thirdparty apps
     'bootstrap4',
