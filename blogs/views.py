@@ -5,6 +5,8 @@ from django.shortcuts import get_object_or_404
 
 from .models import BlogPost
 from .forms import BlogPostform
+from dictionaries.models import Dictionary
+from dictionaries.forms import Dictionaryform
 
 def check_owner(request,blog):
     if blog.owner != request.user:
@@ -37,7 +39,16 @@ def blog_posts(request,):
 def blog_post(request,post_pk):
     "Show blog post"
     blog_post = get_object_or_404(BlogPost,pk=post_pk)
-    context = {'blog_post':blog_post}
+    if request.method != 'POST':
+        form = Dictionaryform()
+    else:
+        form = Dictionaryform(data=request.POST)
+        if form.is_valid():
+            new_dict = form.save(commit=False)
+            new_dict.blog_post = blog_post
+            new_dict.save()
+    words = Dictionary.objects.all()
+    context = {'blog_post':blog_post,'post_pk':post_pk,'form':form,'words':words}
     return render(request,'blogs/blog_post.html',context)
 
 @login_required

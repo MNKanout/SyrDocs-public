@@ -1,4 +1,5 @@
 {% extends 'blogs/base.html' %}
+{% load bootstrap4 %}
 
 {% block page_header %}
 {% endblock page_header %}
@@ -6,14 +7,33 @@
 {% block content %}
 <div class="container">
     <div class="row">
+
+      <!-- Dictioncary form-->
       <div class="col-sm">
-        One of three columns
+        Mini Dictionary
+        <form method="post" action="{% url 'blogs:blog_post' post_pk %}">
+          {% csrf_token %}
+          {% bootstrap_form form %}
+          <button class="btn btn-primary btn-md" 
+            type="submit" name="addWord" value="addWord">Save word</button>
+        </form>
+        <ul>
+          {% for word in words %}
+          <li>{{word}}</li>
+          {% empty %}
+          <p>No words were added</p>
+          {% endfor %}
+        </ul>
       </div>
+
+      <!-- Blog Post form-->
       <div class="col-sm">
         {{blog_post.text | safe}}
       </div>
+
+      <!-- Google API form-->
       <div class="col-sm">
-        One of three columns
+        Google translate
       </div>
     </div>
   </div>
