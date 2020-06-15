@@ -9,7 +9,7 @@ urlpatterns = [
     #Page for showing all blog posts
     path('blog_posts/',views.blog_posts,name='blog_posts'),
     # Page for a specific post
-    path('blog_posts/<int:post_pk>/',views.blog_post,name='blog_post'),
+    path('blog_post/<int:post_pk>/',views.blog_post,name='blog_post'),
     #Page for adding new blog posts
     path('new_blog/',views.new_blog,name='new_blog'),
     #Page for editing existing blog posts

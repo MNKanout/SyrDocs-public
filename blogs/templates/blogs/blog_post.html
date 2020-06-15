@@ -8,8 +8,9 @@
 <div class="container">
     <div class="row">
 
-      <!-- Dictioncary form-->
+      <!-- Dictioncary Section-->
       <div class="col">
+        <!-- Displaying a from for entering new words-->
         Mini Dictionary
         <form method="post" action="{% url 'blogs:blog_post' post_pk %}">
           {% csrf_token %}
@@ -17,12 +18,21 @@
           <button class="btn btn-primary btn-md" 
             type="submit" name="addWord" value="addWord">Save word</button>
         </form>
+
+        <!-- Showing previously saved words-->
         <ul>
           {% for word in words %}
-          <li class="nav-item"><a href="#{{word}}" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="{{word}}">{{word.id}}{{word}}</a></li>
+          <li class="nav-item"><a href="#{{word}}" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="{{word}}">{{word}}</a>
+            </li>
+            <!-- Form for deleting a spesifc dictionary-->
           <div>
             <ul>
               <li class="collapse" id="{{word}}">{{word.word_translation}}
+                <form action="{% url 'dictionaries:del_dictionary' blog_post.id word.id %}" method="POST">
+                  {% csrf_token %}
+                <button class="btn btn-danger btn-sm" 
+                type="submit" name="del" value="post">Delete word</button>      
+              </form>
               </li>
             </ul>
           </div>
@@ -32,13 +42,13 @@
         </ul>
       </div>
 
-      <!-- Blog Post form-->
+      <!-- Blog Post Section-->
       <div class="col-6">
         <h2>{{blog_post.title}}</h2>
         {{blog_post.text | safe}}
       </div>
 
-      <!-- Google API form-->
+      <!-- Translation section-->
       <div class="col">
         Google translate
       </div>

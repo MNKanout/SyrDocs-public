@@ -17,8 +17,13 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
+    # Defualt urls 
     path('admin/', admin.site.urls),
+    # Blog post app urls
     path('',include('blogs.urls')),
+    # Dictionary app urls
+    path('edit_dictionary/',include('dictionaries.urls')),
+    # Users app urls
     path('users/',include('users.urls')),
 
 ]
