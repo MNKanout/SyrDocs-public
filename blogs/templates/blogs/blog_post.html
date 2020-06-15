@@ -9,7 +9,7 @@
     <div class="row">
 
       <!-- Dictioncary form-->
-      <div class="col-sm">
+      <div class="col">
         Mini Dictionary
         <form method="post" action="{% url 'blogs:blog_post' post_pk %}">
           {% csrf_token %}
@@ -19,7 +19,13 @@
         </form>
         <ul>
           {% for word in words %}
-          <li>{{word}}</li>
+          <li class="nav-item"><a href="#{{word}}" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="{{word}}">{{word.id}}{{word}}</a></li>
+          <div>
+            <ul>
+              <li class="collapse" id="{{word}}">{{word.word_translation}}
+              </li>
+            </ul>
+          </div>
           {% empty %}
           <p>No words were added</p>
           {% endfor %}
@@ -27,12 +33,13 @@
       </div>
 
       <!-- Blog Post form-->
-      <div class="col-sm">
+      <div class="col-6">
+        <h2>{{blog_post.title}}</h2>
         {{blog_post.text | safe}}
       </div>
 
       <!-- Google API form-->
-      <div class="col-sm">
+      <div class="col">
         Google translate
       </div>
     </div>
