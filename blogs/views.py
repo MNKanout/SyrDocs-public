@@ -47,8 +47,8 @@ def blog_post(request,post_pk):
             new_dict = form.save(commit=False)
             new_dict.blog_post = blog_post
             new_dict.save()
-    words = Dictionary.objects.all()
-    context = {'blog_post':blog_post,'post_pk':post_pk,'form':form,'words':words}
+    dictionaries = blog_post.dictionary_set.order_by('word_name')
+    context = {'blog_post':blog_post,'post_pk':post_pk,'form':form,'dictionaries':dictionaries}
     return render(request,'blogs/blog_post.html',context)
 
 @login_required

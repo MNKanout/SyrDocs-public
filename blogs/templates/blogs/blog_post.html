@@ -21,14 +21,14 @@
 
         <!-- Showing previously saved words-->
         <ul>
-          {% for word in words %}
-          <li class="nav-item"><a href="#{{word}}" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="{{word}}">{{word}}</a>
+          {% for dictionary in dictionaries %}
+          <li class="nav-item"><a href="#{{dictionary}}" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="{{dictionary}}">{{dictionary}}</a>
             </li>
             <!-- Form for deleting a spesifc dictionary-->
           <div>
             <ul>
-              <li class="collapse" id="{{word}}">{{word.word_translation}}
-                <form action="{% url 'dictionaries:del_dictionary' blog_post.id word.id %}" method="POST">
+              <li class="collapse" id="{{dictionary}}">{{dictionary.word_translation}}
+                <form action="{% url 'dictionaries:del_dictionary' blog_post.id dictionary.id %}" method="POST">
                   {% csrf_token %}
                 <button class="btn btn-danger btn-sm" 
                 type="submit" name="del" value="post">Delete word</button>      
