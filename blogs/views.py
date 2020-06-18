@@ -47,8 +47,9 @@ def blog_post(request,post_pk):
         if form.is_valid():
             new_dict = form.save(commit=False)
             new_dict.blog_post = blog_post
+            new_dict.owner = request.user
             new_dict.save()
-    dictionaries = blog_post.dictionary_set.order_by('word_name')
+    dictionaries = blog_post.dictionary_set.filter(owner=request.user).order_by('word_name')
     context = {'blog_post':blog_post,'post_pk':post_pk,'form':form,'dictionaries':dictionaries}
     return render(request,'blogs/blog_post.html',context)
 

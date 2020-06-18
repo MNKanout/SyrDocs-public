@@ -9,6 +9,7 @@ class Dictionary(models.Model):
     word_name = models.CharField(max_length=50)
     word_translation = models.CharField(max_length=50)
     word_note = models.CharField(max_length=100)
+    owner = models.ForeignKey(User,on_delete=models.CASCADE,default=1)
 
     class Meta:
         verbose_name_plural = 'dictionaries'
