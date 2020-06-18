@@ -9,6 +9,7 @@ from dictionaries.models import Dictionary
 from dictionaries.forms import Dictionaryform
 
 def check_owner(request,blog):
+    """Check the owner of the blog post"""
     if blog.owner != request.user:
         raise Http404
 
@@ -37,9 +38,11 @@ def blog_posts(request,):
         context = {'blogs':blogs,'user':user}
         return render(request,'blogs/blog_posts.html',context)
 
+@login_required
 def blog_post(request,post_pk):
     "Show blog post"
     blog_post = get_object_or_404(BlogPost,pk=post_pk)
+    check_owner(request,blog_post)
     if request.method != 'POST':
         form = Dictionaryform()
     else:
