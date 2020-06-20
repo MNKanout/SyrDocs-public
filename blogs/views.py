@@ -1,12 +1,15 @@
+#Builtin modules
 from django.shortcuts import render, redirect
 from  django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 
+# Poject modules
 from .models import BlogPost
 from .forms import BlogPostform
 from dictionaries.models import Dictionary
 from dictionaries.forms import Dictionaryform
+from dictionaries.views import run_quickstart
 
 def check_owner(request,blog):
     """Check the owner of the blog post"""
@@ -41,8 +44,11 @@ def blog_posts(request,):
 @login_required
 def blog_post(request,post_pk):
     "Show blog post"
+    # Blog post section
     blog_post = get_object_or_404(BlogPost,pk=post_pk)
     check_owner(request,blog_post)
+
+    # Dictionary form section
     if request.method != 'POST':
         form = Dictionaryform()
     else:
@@ -53,7 +59,12 @@ def blog_post(request,post_pk):
             new_dict.owner = request.user
             new_dict.save()
     dictionaries = blog_post.dictionary_set.filter(owner=request.user).order_by('word_name')
-    context = {'blog_post':blog_post,'post_pk':post_pk,'form':form,'dictionaries':dictionaries}
+
+    # Translations section
+    translation = run_quickstart()
+    itext = translation['input']
+    ttext = translation['translatedText']
+    context = {'blog_post':blog_post,'post_pk':post_pk,'form':form,'dictionaries':dictionaries,'itext':itext,'ttext':ttext,'translation':translation}
     return render(request,'blogs/blog_post.html',context)
 
 @login_required

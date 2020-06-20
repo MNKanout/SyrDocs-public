@@ -51,6 +51,15 @@
       <!-- Translation section-->
       <div class="col">
         Google translate
+        <form method="post" action="{% url 'blogs:blog_post' post_pk %}">
+          {% csrf_token %}
+          {% bootstrap_form form %}
+          <button class="btn btn-primary btn-md" 
+            type="submit" name="addWord" value="addWord">Save word</button>
+        </form>
+        <p>{{itext}}</p>
+        <p>{{ttext}}</p>
+        <p>{{translation}}</p>
       </div>
     </div>
   </div>
