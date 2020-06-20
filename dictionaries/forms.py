@@ -1,4 +1,5 @@
 from django import forms
+from django.db import models
 from .models import Dictionary
 
 class Dictionaryform(forms.ModelForm):
@@ -11,3 +12,16 @@ class Dictionaryform(forms.ModelForm):
             {'placeholder':'Add word'}),
             'word_translation':forms.TextInput(attrs={'placeholder':'Add meaning'})
         }
+
+languages = ( 
+    (1, "Arabic"), 
+    (2, "English"), 
+    (3, "Norwegian"), 
+    (4, "Frensh"), 
+    (5, "Swedish"), 
+) 
+class Translateform(forms.Form):
+    """A simple translation form"""
+    source_language = forms.TypedChoiceField(choices=languages,label='')
+    target_language = forms.TypedChoiceField(choices=languages,label='')
+    result = forms.CharField(widget=forms.Textarea())

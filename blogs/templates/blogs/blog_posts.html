@@ -32,6 +32,7 @@
 <ul class="navbar-nav">
     {% for blog in blogs %}
     <div class="container bg-light pd-2 mb-4">
+        <p>
         <a href="{% url 'blogs:blog_post' blog.id %}" 
         style="text-decoration:   none; color: black;">
                 <li class="nav-item"><h4>{{blog.title.title}}</h4></li>
@@ -40,11 +41,11 @@
         {% if blog.owner == user %}
         <a class="btn btn-sm btn-info"
             href="{% url 'blogs:edit_blog' blog.id %}"> Edit blog post</a>
-
         <a class="btn btn-sm btn-danger" 
             href="{% url 'blogs:del_post' blog.id %}"> Delete post</a>
         {% endif %}
         </a>
+        </p>
     </div>
     {% empty %}
     <p>No blogs were add</p>

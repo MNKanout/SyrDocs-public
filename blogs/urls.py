@@ -16,6 +16,8 @@ urlpatterns = [
     path('edit_blog/<int:blog_id>/',views.edit_blog,name='edit_blog'),
     #Page for deleting posts
     path('del_post/<int:blog_id>/',views.del_post,name='del_post'),
+    # Contact page
+    path('contact',views.contact,name='contact'),
 
 
 

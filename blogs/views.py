@@ -8,7 +8,7 @@ from django.shortcuts import get_object_or_404
 from .models import BlogPost
 from .forms import BlogPostform
 from dictionaries.models import Dictionary
-from dictionaries.forms import Dictionaryform
+from dictionaries.forms import Dictionaryform, Translateform
 from dictionaries.views import run_quickstart
 
 def check_owner(request,blog):
@@ -50,21 +50,30 @@ def blog_post(request,post_pk):
 
     # Dictionary form section
     if request.method != 'POST':
-        form = Dictionaryform()
+        dict_form = Dictionaryform()
     else:
-        form = Dictionaryform(data=request.POST)
-        if form.is_valid():
-            new_dict = form.save(commit=False)
+        dict_form = Dictionaryform(data=request.POST)
+        if dict_form.is_valid():
+            new_dict = dict_form.save(commit=False)
             new_dict.blog_post = blog_post
             new_dict.owner = request.user
             new_dict.save()
+            # Reload dictionaries with added dictionary and an empty form
+            return redirect('blogs:blog_post',post_pk)
     dictionaries = blog_post.dictionary_set.filter(owner=request.user).order_by('word_name')
 
     # Translations section
-    translation = run_quickstart()
-    itext = translation['input']
-    ttext = translation['translatedText']
-    context = {'blog_post':blog_post,'post_pk':post_pk,'form':form,'dictionaries':dictionaries,'itext':itext,'ttext':ttext,'translation':translation}
+    if request.method != 'POST':
+        trans_form = Translateform()
+        translation = run_quickstart()
+        itext = translation['input']
+        ttext = translation['translatedText']
+    else:
+        trans_form = Translateform()
+        translation = run_quickstart()
+        itext = translation['input']
+        ttext = translation['translatedText']
+    context = {'blog_post':blog_post,'post_pk':post_pk,'form':dict_form,'trans_form':trans_form,'dictionaries':dictionaries,'itext':itext,'ttext':ttext,'translation':translation}
     return render(request,'blogs/blog_post.html',context)
 
 @login_required
@@ -126,3 +135,7 @@ def del_post(request,blog_id):
     #Display an empty page
     context = {'form':form,'blog_id':blog_id,'blog_post':blog_post}
     return render(request,'blogs/del_post.html',context)
+
+def contact(request):
+    """View contact page"""
+    return render(request,'blogs/contact.html')

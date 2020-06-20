@@ -9,7 +9,7 @@
     <div class="row">
 
       <!-- Dictioncary Section-->
-      <div class="col">
+      <div class="col-3">
         <!-- Displaying a from for entering new words-->
         Mini Dictionary
         <form method="post" action="{% url 'blogs:blog_post' post_pk %}">
@@ -49,13 +49,13 @@
       </div>
 
       <!-- Translation section-->
-      <div class="col">
+      <div class="col-3">
         Google translate
         <form method="post" action="{% url 'blogs:blog_post' post_pk %}">
           {% csrf_token %}
-          {% bootstrap_form form %}
+          {% bootstrap_form trans_form %}
           <button class="btn btn-primary btn-md" 
-            type="submit" name="addWord" value="addWord">Save word</button>
+            type="submit" name="addWord" value="addWord">Translate</button>
         </form>
         <p>{{itext}}</p>
         <p>{{ttext}}</p>

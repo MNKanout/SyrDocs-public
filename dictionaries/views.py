@@ -7,7 +7,7 @@ from django.http import Http404
 from google.cloud import translate_v2 as translate
 #Project modules
 from .models import Dictionary
-from .forms import Dictionaryform
+from .forms import Dictionaryform, Translateform
 
 def check_owner(request,dictionary):
     """Check the owner of the dictionary"""
