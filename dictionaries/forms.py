@@ -19,9 +19,23 @@ languages = (
     (3, "Norwegian"), 
     (4, "Frensh"), 
     (5, "Swedish"), 
-) 
+)
+
 class Translateform(forms.Form):
     """A simple translation form"""
-    source_language = forms.TypedChoiceField(choices=languages,label='')
-    target_language = forms.TypedChoiceField(choices=languages,label='')
-    result = forms.CharField(widget=forms.Textarea())
+    # Select source Language
+    source_language = forms.TypedChoiceField(choices=languages, label='',
+    widget=(forms.Select(attrs={'class':'form-control mb-3'})))
+
+    # Select output langauge
+    target_language = forms.TypedChoiceField(choices=languages, label='',
+    widget=(forms.Select(attrs={'class':'form-control mb-3'})))
+
+    # Input text field
+    input_langauge = forms.CharField(max_length=50, label='',
+        widget=forms.TextInput(attrs={'placeholder':'Translate text',
+                    'class':'form-control mb-3'}))
+
+    # Translation output field
+    result = forms.CharField(label='', 
+        widget=forms.Textarea(attrs={'placeholder':'Translation','class':'form-control mb-3'}))
