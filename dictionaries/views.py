@@ -8,6 +8,7 @@ from google.cloud import translate_v2 as translate
 #Project modules
 from .models import Dictionary
 from .forms import Dictionaryform, Translateform
+from blogs.models import BlogPost
 
 def check_owner(request,dictionary):
     """Check the owner of the dictionary"""
@@ -24,21 +25,42 @@ def del_dictionary(request,blog_post_id,word_id):
         dictionary.delete()
         return redirect('blogs:blog_post', blog_post_id)
 
-def run_quickstart():
+@login_required
+def show_dictionaries(request,blog_post):
+    """Return all user's dictionaries related to a spesifc post"""
+    dictionaries = blog_post.dictionary_set.filter(owner=request.user).order_by('word_name')
+    return dictionaries
+
+@login_required
+def dictionary_form(request,blog_post,post_pk):
+    """Display a form for entering a new dictionary"""
+    dict_form = Dictionaryform(data=request.POST)
+    if dict_form.is_valid():
+        new_dict = dict_form.save(commit=False)
+        # Set to which post does the dictionary relate to.
+        new_dict.blog_post = blog_post
+        # Set the owner of the new dictionary.
+        new_dict.owner = request.user
+        new_dict.save()
+        # Return to the same post after saving the new dictionary.
+
+
+def run_quickstart(input_language,source_language,target_language):
     # Instantiates a client
     translate_client = translate.Client()
 
     # The text to translate
-    text = u'Hello, world!'
+    text = str(input_language)
+    print(type(text))
+    #text = input_language
     # The target language
-    target = 'ru'
+    target = target_language
 
     # Translates some text into Russian
-    translation = translate_client.translate(
-        text,
+    translation = translate_client.translate(text,source_language=source_language,
         target_language=target)
 
-    return translation
+    return translation['translatedText']
     #print(u'Text: {}'.format(text))
     #print(u'Translation: {}'.format(translation['translatedText']))
     # [END translate_quickstart]

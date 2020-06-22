@@ -10,28 +10,29 @@
 
       <!-- Dictioncary Section-->
       <div class="col-3">
-        <!-- Displaying a from for entering new words-->
+        <!-- Dictionary form-->
         Mini Dictionary
-        <form method="post" action="{% url 'blogs:blog_post' post_pk %}">
+        <form class="mt-1" method="post" action="{% url 'blogs:blog_post' post_pk %}">
           {% csrf_token %}
-          {% bootstrap_form form %}
+          {% bootstrap_form dict_form %}
           <button class="btn btn-primary btn-md" 
             type="submit" name="addWord" value="addWord">Save word</button>
         </form>
 
-        <!-- Showing previously saved words-->
+        <!-- Saved dictionaries-->
         <ul>
           {% for dictionary in dictionaries %}
           <li class="nav-item"><a href="#{{dictionary}}" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="{{dictionary}}">{{dictionary}}</a>
             </li>
+
             <!-- Form for deleting a spesifc dictionary-->
           <div>
             <ul>
               <li class="collapse" id="{{dictionary}}">{{dictionary.word_translation}}
-                <form action="{% url 'dictionaries:del_dictionary' blog_post.id dictionary.id %}" method="POST">
+                <form class="mt-2" action="{% url 'dictionaries:del_dictionary' blog_post.id dictionary.id %}" method="POST">
                   {% csrf_token %}
                 <button class="btn btn-danger btn-sm" 
-                type="submit" name="del" value="post">Delete word</button>      
+                type="submit" name="del" value="post">Delete</button>      
               </form>
               </li>
             </ul>
@@ -51,25 +52,34 @@
       <!-- Translation section-->
       <div class="col-3">
         Google translate
-        <form method="post" action="{% url 'blogs:blog_post' post_pk %}">
-          <div class="form-row">
+        <form method="GET" action="{% url 'blogs:blog_post' post_pk %}">
+          <div class="form-row mt-1">
             <div class="col">
           {% csrf_token %}
-          {{ trans_form.source_language}} 
+          {{trans_form.source_language}}
             </div>
             <div class="col">
               {{trans_form.target_language}}
             </div>
           </div>
+          <div class="form-row">
+            <div class="col">
           {{trans_form.input_langauge}}
-          {{trans_form.result}}
+            </div>
+            </div>
+
           <button class="btn btn-primary btn-md" 
             type="submit" name="addWord" value="addWord">Translate</button>
-
         </form>
-        <p>{{itext}}</p>
-        <p>{{ttext}}</p>
-        <p>{{translation}}</p>
+        <div class="container border border-secondary rounded-lg mt-2 pt-0 pl-3 pr-3 pb-5">
+          <div class="row pb-5">
+            <div class="col pb-5">
+              {{translation}}
+            </div>
+          </div>
+        </div>
+        <!--{{translation}}-->
+
       </div>
     </div>
   </div>

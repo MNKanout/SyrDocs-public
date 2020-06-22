@@ -14,17 +14,17 @@ class Dictionaryform(forms.ModelForm):
         }
 
 languages = ( 
-    (1, "Arabic"), 
-    (2, "English"), 
-    (3, "Norwegian"), 
-    (4, "Frensh"), 
-    (5, "Swedish"), 
+    ('ar', "Arabic"), 
+    ('en', "English"), 
+    ('no', "Norwegian"), 
+    ('fr', "Frensh"), 
+    ('sv', "Swedish"), 
 )
 
 class Translateform(forms.Form):
     """A simple translation form"""
     # Select source Language
-    source_language = forms.TypedChoiceField(choices=languages, label='',
+    source_language = forms.TypedChoiceField(choices=languages, label='',initial='test initial',
     widget=(forms.Select(attrs={'class':'form-control mb-3'})))
 
     # Select output langauge
@@ -35,7 +35,3 @@ class Translateform(forms.Form):
     input_langauge = forms.CharField(max_length=50, label='',
         widget=forms.TextInput(attrs={'placeholder':'Translate text',
                     'class':'form-control mb-3'}))
-
-    # Translation output field
-    result = forms.CharField(label='', 
-        widget=forms.Textarea(attrs={'placeholder':'Translation','class':'form-control mb-3'}))

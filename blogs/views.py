@@ -3,13 +3,14 @@ from django.shortcuts import render, redirect
 from  django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import get_object_or_404
+from django.urls import reverse
 
 # Poject modules
 from .models import BlogPost
 from .forms import BlogPostform
 from dictionaries.models import Dictionary
 from dictionaries.forms import Dictionaryform, Translateform
-from dictionaries.views import run_quickstart
+from dictionaries.views import run_quickstart, show_dictionaries, dictionary_form
 
 def check_owner(request,blog):
     """Check the owner of the blog post"""
@@ -23,6 +24,7 @@ def index(request):
 @login_required
 def blog_posts(request,):
     """Show all blog posts"""
+    print(request.GET.get)
     if request.GET.get('newest'):
         blogs = BlogPost.objects.filter(owner=request.user).order_by('date_added')
         user = request.user
@@ -48,32 +50,23 @@ def blog_post(request,post_pk):
     blog_post = get_object_or_404(BlogPost,pk=post_pk)
     check_owner(request,blog_post)
 
-    # Dictionary form section
+    #Dictionary section
     if request.method != 'POST':
         dict_form = Dictionaryform()
     else:
-        dict_form = Dictionaryform(data=request.POST)
-        if dict_form.is_valid():
-            new_dict = dict_form.save(commit=False)
-            new_dict.blog_post = blog_post
-            new_dict.owner = request.user
-            new_dict.save()
-            # Reload dictionaries with added dictionary and an empty form
-            return redirect('blogs:blog_post',post_pk)
-    dictionaries = blog_post.dictionary_set.filter(owner=request.user).order_by('word_name')
-
+        dictionary_form(request,blog_post,post_pk)
+        return redirect('blogs:blog_post',post_pk)
+        
     # Translations section
-    if request.method != 'POST':
+    if request.method == 'GET':
         trans_form = Translateform()
-        translation = run_quickstart()
-        itext = translation['input']
-        ttext = translation['translatedText']
-    else:
-        trans_form = Translateform()
-        translation = run_quickstart()
-        itext = translation['input']
-        ttext = translation['translatedText']
-    context = {'blog_post':blog_post,'post_pk':post_pk,'form':dict_form,'trans_form':trans_form,'dictionaries':dictionaries,'itext':itext,'ttext':ttext,'translation':translation}
+        source_language = request.GET.get('source_language','')
+        target_language = request.GET.get('target_language','')
+        input_langauge = request.GET.get('input_langauge','')
+        translation = run_quickstart(input_langauge,source_language,target_language)
+
+    dictionaries = show_dictionaries(request,blog_post)
+    context = {'blog_post':blog_post,'post_pk':post_pk,'dict_form':dict_form,'trans_form':trans_form,'dictionaries':dictionaries,'translation':translation}
     return render(request,'blogs/blog_post.html',context)
 
 @login_required
