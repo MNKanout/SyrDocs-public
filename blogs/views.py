@@ -10,7 +10,7 @@ from .models import BlogPost
 from .forms import BlogPostform
 from dictionaries.models import Dictionary
 from dictionaries.forms import Dictionaryform, Translateform
-from dictionaries.views import run_quickstart, show_dictionaries, dictionary_form
+from dictionaries.views import translate_text, show_dictionaries, dictionary_form
 
 def check_owner(request,blog):
     """Check the owner of the blog post"""
@@ -59,12 +59,15 @@ def blog_post(request,post_pk):
         
     # Translations section
     if request.method == 'GET':
-        trans_form = Translateform()
+        trans_form = Translateform(request.GET)
         source_language = request.GET.get('source_language','')
         target_language = request.GET.get('target_language','')
         input_langauge = request.GET.get('input_langauge','')
-        translation = run_quickstart(input_langauge,source_language,target_language)
-
+        if input_langauge:
+            translation = translate_text(input_langauge,source_language,target_language)
+        else:
+            translation = ''
+        
     dictionaries = show_dictionaries(request,blog_post)
     context = {'blog_post':blog_post,'post_pk':post_pk,'dict_form':dict_form,'trans_form':trans_form,'dictionaries':dictionaries,'translation':translation}
     return render(request,'blogs/blog_post.html',context)

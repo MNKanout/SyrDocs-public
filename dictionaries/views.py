@@ -45,22 +45,15 @@ def dictionary_form(request,blog_post,post_pk):
         # Return to the same post after saving the new dictionary.
 
 
-def run_quickstart(input_language,source_language,target_language):
+def translate_text(input_language,source_language,target_language):
     # Instantiates a client
     translate_client = translate.Client()
 
     # The text to translate
     text = str(input_language)
-    print(type(text))
-    #text = input_language
-    # The target language
-    target = target_language
 
-    # Translates some text into Russian
+    # Translates
     translation = translate_client.translate(text,source_language=source_language,
-        target_language=target)
+        target_language=target_language)
 
     return translation['translatedText']
-    #print(u'Text: {}'.format(text))
-    #print(u'Translation: {}'.format(translation['translatedText']))
-    # [END translate_quickstart]
