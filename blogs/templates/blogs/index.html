@@ -1,12 +1,42 @@
 {% extends 'blogs/base.html' %}
 {% block page_header %}
-<div class="jumbotron">
-    <h1>DjangoBlog</h1>
-    <p>DjangoBlog is a blogging website that been written in Python
-    using the Django framwork. It shares some basic functionality,
-    such as creating a new user, creating new posts, editing existing posts
-    , and some other under the hood functions.</p>
+<div class="jumbotron text-left">
+    <h1 class="display-4 font-weight-bold">SharedLearning</h1>
+    <p>Is a social media learning platform that gives you the tools that you need when learning in forgin languages. New featuers and languages will be added gradualy to ensure best user experince.</p>
     <a class="btn btn-danger btn-lg" role= "button"
-    href="{% url 'blogs:new_blog' %}">Write your new blog now</a>
+    href="{% url 'blogs:new_blog' %}">Write your first post now !</a>
 </div>
 {% endblock page_header %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h3 class="display-4">Getting started?</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h5>It's very simple! Just follow the simple steps below and you should be good to go! If you have any question, don't hesitate to send us an e-mail, and we will be happy to replay to you as soon as possible!</h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <ol>
+                <li class="lead">Create your free account</li>
+                <li class="lead">Write your first post</li>
+                <li class="lead">Add your first word in the mini dictionary</li>
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h3 class="display-4">Alpha release?</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h5>An Alpha release means that the website is working correctly, but it might experince some issues which should be fixed in upcoming patches.</h5>
+        </div>
+    </div>
+</div>
+{% endblock content %}

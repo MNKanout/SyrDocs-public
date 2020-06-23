@@ -11,56 +11,67 @@
   </head>
 
 <body>
-<nav class="navbar navbar-expand-md sticky-top navbar-light bg-light mb-4 pb-2">
-    <a class="navbar-brand text-success"
-       href="{% url 'blogs:index' %}">DjangoBlog</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse"
-         data-target="#navbarCollapse"><span class="navbar-toggler-icon">
-        </span>
-    </button>
+    <header>
+        <nav class="navbar navbar-expand-md sticky-top navbar-light bg-light mb-4 pb-2">
+            <a class="navbar-brand text-success"
+            href="{% url 'blogs:index' %}">SharedLearning<sup>Alpha</sup></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarCollapse"><span class="navbar-toggler-icon">
+                </span>
+            </button>
 
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-         <!--Left side navigation bar -->
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link"
-                       href="{% url 'blogs:index' %}">Home</a></li>
-                <li class="nav-item">
-                    <a class="nav-link"
-                       href="{% url 'blogs:blog_posts' %}">Posts</a></li>
-                <li class="nav-item">
-                    <a class="nav-link"
-                        href="{% url 'blogs:contact' %}">Contact</a></li>
-            </ul>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <!--Left side navigation bar -->
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link"
+                            href="{% url 'blogs:index' %}">Home</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                            href="{% url 'blogs:blog_posts' %}">Posts</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                                href="{% url 'blogs:contact' %}">Contact</a></li>
+                    </ul>
 
-             <!--Right side navigation bar -->
-            <ul class="navbar-nav ml-auto">
-                {% if user.is_authenticated %}
-                <li class="nav-item"><span class="navbar-text">
-                     Hello, {{user.username}}</span></li>
-                <li class="nav-item">
-                    <a class="nav-link"
-                       href="{% url 'users:logout' %}">Log out</a></li>
+                    <!--Right side navigation bar -->
+                    <ul class="navbar-nav ml-auto">
+                        {% if user.is_authenticated %}
+                        <li class="nav-item"><span class="navbar-text">
+                            Hello, {{user.username}}</span></li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                            href="{% url 'users:logout' %}">Log out</a></li>
 
-                {% else %}
-                <li class="nav-item">
-                    <a class="nav-link"
-                       href="{% url 'users:login' %}">Login</a></li>
-                <li class="nav-item">
-                    <a class="nav-link"
-                       href="{% url 'users:register' %}">Register</a></li>
-                 {% endif %}
-            </ul>
-    </div>
-</nav>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link"
+                            href="{% url 'users:login' %}">Login</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                            href="{% url 'users:register' %}">Register</a></li>
+                        {% endif %}
+                    </ul>
+            </div>
+        </nav>
+    </header>
 
-<main role="main" class="container">
-    <div class="pb-2 mb-2 border-bottom">
-        {% block page_header %} {% endblock page_header %}
-    </div>
-    <div>
-        {% block content %} {% endblock content %}
-    </div>
-</main>
+    <main role="main" class="container">
+        <div class="pb-2 mb-2 border-bottom">
+            {% block page_header %} {% endblock page_header %}
+        </div>
+        <div>
+            {% block content %} {% endblock content %}
+        </div>
+    </main>
+    <footer>
+        <div class="container text-center">
+            <div class="row">
+                <div class="col">
+                    <p class="sticky-bottom navbar-light bg-light">&copy;Syrwegian</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

@@ -33,16 +33,24 @@
     {% for blog in blogs %}
     <div class="container bg-light pd-2 mb-4">
         <a href="{% url 'blogs:blog_post' blog.id %}" 
-        style="text-decoration:   none; color: black;">
+                style="text-decoration:   none; color: black;">
+        <div class="row">
+            <div class="col">
                 <li class="nav-item"><h4>{{blog.title.title}}</h4></li>
                 <p>{{blog.date_added}} By {{blog.owner}}</p>
                 <h6 class="navbar-text">{{blog.text|slice:'255'|safe}}.....</h6>
+           </div>
+        </div>
+        <div class="row">
+            <div class="col">
         {% if blog.owner == user %}
-        <a class="btn btn-sm btn-info"
-            href="{% url 'blogs:edit_blog' blog.id %}">Edit post</a>
-        <a class="btn btn-sm btn-danger" 
-            href="{% url 'blogs:del_post' blog.id %}">Delete post</a>
+                <a class="btn btn-sm btn-info"
+                    href="{% url 'blogs:edit_blog' blog.id %}">Edit</a>
+                <a class="btn btn-sm btn-danger" 
+                    href="{% url 'blogs:del_post' blog.id %}">Delete</a>
         {% endif %}
+            </div>
+        </div>
         </a>
     </div>
     {% empty %}
