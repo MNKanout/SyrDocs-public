@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    {% load static %}
     {% load bootstrap4 %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1,
     shrink-to-fit=no">
-    <title>DjangoBlog</title>
+    <title>SharedLearning</title>
     {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'style/main.css' %}" type="text/css">
     {% bootstrap_javascript jquery='full' %}
   </head>
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-md sticky-top navbar-light bg-light mb-4 pb-2">
-            <a class="navbar-brand text-success"
+        <nav class="navbar customNav navbar-expand-md sticky-top mb-4 pb-2">
+            <a class="navbar-brand" id="customBrand"
             href="{% url 'blogs:index' %}">SharedLearning<sup>Alpha</sup></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse"
                 data-target="#navbarCollapse"><span class="navbar-toggler-icon">
@@ -64,14 +66,8 @@
             {% block content %} {% endblock content %}
         </div>
     </main>
-    <footer>
-        <div class="container text-center">
-            <div class="row">
-                <div class="col">
-                    <p class="sticky-bottom navbar-light bg-light">&copy;Syrwegian</p>
-                </div>
-            </div>
-        </div>
+    <footer id="customFooter">
+        <p>&copy;Syrwegian 2020</p>
     </footer>
 </body>
 </html>
