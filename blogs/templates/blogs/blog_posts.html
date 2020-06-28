@@ -5,7 +5,7 @@
 <div class="container-lg">
     <div class="row">
         <div class="col">
-            <h2 class="text-primary">Blog posts</h2>
+            <h2 class='text'>Posts</h2>
         </div>
         <div class="col-mr-auto">
     <h3><a class="btn btn-primary btn-md"
@@ -17,7 +17,7 @@
 
 {% block content %}
 <!-- Sort by form-->
-<div class="container" style="display: block;">
+<div class="d-flex flex-row bd-highlight mb-3">
     <p style="display: inline;">Sort by:</p>
     <form style="display: inline;" method="GET" action="{% url 'blogs:blog_posts' %}">
         <button class="btn btn-sm text-info" type="submit" 
@@ -31,7 +31,7 @@
 <!-- List of blog posts -->
 <ul class="navbar-nav">
     {% for blog in blogs %}
-    <div class="container bg-light pd-2 mb-4">
+    <div class="container bg-light pd-2 mb-4 shadow-sm">
         <a href="{% url 'blogs:blog_post' blog.id %}" 
                 style="text-decoration:   none; color: black;">
         <div class="row">

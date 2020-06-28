@@ -14,46 +14,45 @@
 
 <body>
     <header>
-        <nav class="navbar customNav navbar-expand-md sticky-top mb-4 pb-2">
+        <nav class="navbar customNav navbar-expand-md navbar-expand-md sticky-top mb-4 pb-2 navbar-dark">
             <a class="navbar-brand" id="customBrand"
             href="{% url 'blogs:index' %}">SharedLearning<sup>Alpha</sup></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse"
-                data-target="#navbarCollapse"><span class="navbar-toggler-icon">
-                </span>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"
+                data-target="#navbarCollapse"><span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <!--Left side navigation bar -->
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link"
-                            href="{% url 'blogs:index' %}">Home</a></li>
-                        <li class="nav-item">
-                            <a class="nav-link"
-                            href="{% url 'blogs:blog_posts' %}">Posts</a></li>
-                        <li class="nav-item">
-                            <a class="nav-link"
-                                href="{% url 'blogs:contact' %}">Contact</a></li>
-                    </ul>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link"
+                        href="{% url 'blogs:index' %}">Home</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                        href="{% url 'blogs:blog_posts' %}">Posts</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                            href="{% url 'blogs:contact' %}">Contact</a></li>
+                </ul>
 
                     <!--Right side navigation bar -->
-                    <ul class="navbar-nav ml-auto">
-                        {% if user.is_authenticated %}
-                        <li class="nav-item"><span class="navbar-text">
-                            Hello, {{user.username}}</span></li>
-                        <li class="nav-item">
-                            <a class="nav-link"
-                            href="{% url 'users:logout' %}">Log out</a></li>
+                <ul class="navbar-nav ml-auto">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item"><span class="navbar-text">
+                        Hello, {{user.username}}</span></li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                        href="{% url 'users:logout' %}">Log out</a></li>
 
-                        {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link"
-                            href="{% url 'users:login' %}">Login</a></li>
-                        <li class="nav-item">
-                            <a class="nav-link"
-                            href="{% url 'users:register' %}">Register</a></li>
-                        {% endif %}
-                    </ul>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link"
+                        href="{% url 'users:login' %}">Login</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                        href="{% url 'users:register' %}">Register</a></li>
+                    {% endif %}
+                </ul>
             </div>
         </nav>
     </header>
@@ -66,17 +65,9 @@
             {% block content %} {% endblock content %}
         </div>
     </main>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-
+    
     <footer id="customFooter">
-        <p>&copy;Syrwegian 2020</p>
+        <p>Syrwegian &copy;2020</p>
     </footer>
 </body>
 </html>
