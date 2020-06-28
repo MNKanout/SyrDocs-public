@@ -9,16 +9,17 @@
 .customNav a:hover {
     color:#1d3557 ;
 }
+.customNav button {
+    color: #f1faee;
+}
 #customBrand {
     color: #a8dadc;
 }
 #customFooter {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 2.5rem;  
+    position: relative;
+    height: 50px;
+    margin-top: 200px; 
     text-align: center; 
-    padding-bottom: 0.5rem;
     background-color:#457b9d;
     color:#f1faee ;
 }
