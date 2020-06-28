@@ -33,7 +33,6 @@ else:
 ALLOWED_HOSTS = ['syrwegian.com','45.132.241.24','localhost']
 
 # CKeditor settings
-
 CKEDITOR_CONFIGS = {
     'default': {
         'disableNativeSpellChecker' : False,
@@ -41,7 +40,17 @@ CKEDITOR_CONFIGS = {
     },
 }
 
-
+# TinyMCE settings
+TINYMCE_DEFAULT_CONFIG = {
+    "plugins": "table,spellchecker,paste,searchreplace,autoresize",
+    "toolbar": "undo redo styleselect bold italic  toolbar alignleft aligncenter alignright forecolor backcolor linkimage",
+    "custom_undo_redo_levels": 10,
+    "menubar": False,
+    "browser_spellcheck": True,
+    "resize": True,
+    "autoresize_bottom_margin": 450,
+    "branding": False,
+}
 # Application definition
 INSTALLED_APPS = [
     #My apps
@@ -52,6 +61,7 @@ INSTALLED_APPS = [
     #Thirdparty apps
     'bootstrap4',
     'ckeditor',
+    'tinymce',
 
     #Default apps
     'django.contrib.admin',
