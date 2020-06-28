@@ -51,9 +51,11 @@ def translate_text(input_language,source_language,target_language):
 
     # The text to translate
     text = str(input_language)
-
-    # Translates
-    translation = translate_client.translate(text,source_language=source_language,
-        target_language=target_language)
-
-    return translation['translatedText']
+    if source_language == target_language:
+        translation = 'Invalid language option!'
+        return translation
+        # Translates
+    else:
+        translation = translate_client.translate(text,source_language=source_language,
+            target_language=target_language)
+        return translation['translatedText']
