@@ -1,6 +1,5 @@
 from django import forms
 from .models import BlogPost
-from ckeditor.widgets import CKEditorWidget
 from tinymce.widgets import TinyMCE
 
 class BlogPostform(forms.ModelForm):

@@ -10,7 +10,7 @@ from .models import BlogPost
 from .forms import BlogPostform
 from dictionaries.models import Dictionary
 from dictionaries.forms import Dictionaryform, Translateform
-from dictionaries.views import translate_text, show_dictionaries, dictionary
+from dictionaries.views import translate_, show_dictionaries, dictionary
 
 def check_owner(request,blog):
     """Check the owner of the blog post"""
@@ -48,24 +48,19 @@ def blog_post(request,post_pk):
     # Blog post section
     blog_post = get_object_or_404(BlogPost,pk=post_pk)
     check_owner(request,blog_post)
-
-    #Dictionary section
-    if request.method != 'POST':
-        dict_form = Dictionaryform()
-    else:
-        dictionary(request,blog_post,post_pk)
-        return redirect('blogs:blog_post',post_pk)
         
-    # Translations section
     if request.method == 'GET':
-        trans_form = Translateform(request.GET)
-        source_language = request.GET.get('source_language','')
-        target_language = request.GET.get('target_language','')
-        input_langauge = request.GET.get('input_langauge','')
-        if input_langauge:
-            translation = translate_text(input_langauge,source_language,target_language)
-        else:
-            translation = ''
+        # Display empty forms
+        source_language = request.session['source_language']
+        target_language = request.session['target_language'] 
+
+        dict_form = Dictionaryform() # Dictionary form
+        trans_form = Translateform(initial={'source_language':source_language,'target_language':target_language}) # Translation form
+        translation = ''
+    else:
+        dict_form = Dictionaryform() # Dictionary form
+        trans_form = Translateform(request.POST) # Translation form
+        translation = translate_(request)
         
     dictionaries = show_dictionaries(request,blog_post)
     context = {'blog_post':blog_post,'post_pk':post_pk,'dict_form':dict_form,'trans_form':trans_form,'dictionaries':dictionaries,'translation':translation}

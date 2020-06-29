@@ -12,7 +12,7 @@
       <div class="col-3">
         <!-- Dictionary form-->
         Mini Dictionary
-        <form class="mt-1" method="post" action="{% url 'blogs:blog_post' post_pk %}">
+        <form class="mt-1" method="post" action="{% url 'dictionaries:dictionary' post_pk %}">
           {% csrf_token %}
           {% bootstrap_form dict_form %}
           <button class="btn btn-primary btn-md" 
@@ -30,7 +30,7 @@
           <div>
             <ul>
               <li class="collapse" id="id-{{dictionary.id}}">{{dictionary.word_translation}}
-                <form class="mt-2" action="{% url 'dictionaries:del_dictionary' blog_post.id dictionary.id %}" method="POST">
+                <form class="mt-2" action="{% url 'dictionaries:delete' blog_post.id dictionary.id %}" method="POST">
                   {% csrf_token %}
                 <button class="btn btn-danger btn-sm" 
                 type="submit" name="del" value="post">Delete</button>      
@@ -57,7 +57,7 @@
       <!--Input section-->
       <div class="col-3">
         Google translate
-        <form method="GET" action="{% url 'blogs:blog_post' post_pk %}">
+        <form method="POST" action="{% url 'blogs:blog_post' post_pk %}">
           <div class="form-row mt-1">
             <div class="col">
           {% csrf_token %}
@@ -73,7 +73,7 @@
             </div>
           </div>
           <button class="btn btn-primary btn-md" 
-            type="submit" name="addWord" value="addWord">Translate</button>
+            type="submit" name="Translate" value="submit">Translate</button>
         </form>
         <!--End of input section-->
 

@@ -17,8 +17,9 @@ def check_owner(request,dictionary):
 
 
 @login_required
-def dictionary(request,blog_post,post_pk):
+def dictionary(request,post_pk):
     """Display a form for entering a new dictionary"""
+    blog_post = get_object_or_404(BlogPost,pk=post_pk)
     dict_form = Dictionaryform(data=request.POST)
     if dict_form.is_valid():
         new_dict = dict_form.save(commit=False)
@@ -28,10 +29,9 @@ def dictionary(request,blog_post,post_pk):
         new_dict.owner = request.user
         new_dict.save()
         return redirect('blogs:blog_post',post_pk)
-        # Return to the same post after saving the new dictionary.
-
+    
 @login_required
-def del_dictionary(request,blog_post_id,word_id):
+def delete(request,blog_post_id,word_id):
     """Delete an existed dictionary"""
     dictionary = get_object_or_404(Dictionary,pk=word_id)
     check_owner(request,dictionary)
@@ -46,17 +46,24 @@ def show_dictionaries(request,blog_post):
     dictionaries = blog_post.dictionary_set.filter(owner=request.user).order_by('word_name')
     return dictionaries
 
-def translate_text(input_language,source_language,target_language):
-    # Instantiates a client
-    translate_client = translate.Client()
+def translate_(request):
+    trans_form = Translateform(request.POST)
+    if trans_form.is_valid():
+        source_language = trans_form.cleaned_data['source_language']
+        target_language = trans_form.cleaned_data['target_language']
+        input_langauge = trans_form.cleaned_data['input_langauge']
+        # Set new defaults
+        request.session['source_language'] = source_language
+        request.session['target_language'] = target_language
+        # Set translation client
+        translate_client = translate.Client()
 
     # The text to translate
-    text = str(input_language)
-    if source_language == target_language:
-        translation = 'Invalid language option!'
-        return translation
-        # Translates
-    else:
-        translation = translate_client.translate(text,source_language=source_language,
-            target_language=target_language)
-        return translation['translatedText']
+        text = str(input_langauge)
+        if source_language == target_language:
+            translation = 'Invalid language option!'
+            return translation
+        else:
+            translation = translate_client.translate(text,source_language=source_language,
+                 target_language=target_language)
+            return translation['translatedText']
