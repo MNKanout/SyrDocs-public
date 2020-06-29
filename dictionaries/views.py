@@ -15,6 +15,21 @@ def check_owner(request,dictionary):
     if request.user != dictionary.owner:
         raise Http404
 
+
+@login_required
+def dictionary(request,blog_post,post_pk):
+    """Display a form for entering a new dictionary"""
+    dict_form = Dictionaryform(data=request.POST)
+    if dict_form.is_valid():
+        new_dict = dict_form.save(commit=False)
+        # Set to which post does the dictionary belonge to.
+        new_dict.blog_post = blog_post
+        # Set the owner of the new dictionary.
+        new_dict.owner = request.user
+        new_dict.save()
+        return redirect('blogs:blog_post',post_pk)
+        # Return to the same post after saving the new dictionary.
+
 @login_required
 def del_dictionary(request,blog_post_id,word_id):
     """Delete an existed dictionary"""
@@ -30,20 +45,6 @@ def show_dictionaries(request,blog_post):
     """Return all user's dictionaries related to a spesifc post"""
     dictionaries = blog_post.dictionary_set.filter(owner=request.user).order_by('word_name')
     return dictionaries
-
-@login_required
-def dictionary_form(request,blog_post,post_pk):
-    """Display a form for entering a new dictionary"""
-    dict_form = Dictionaryform(data=request.POST)
-    if dict_form.is_valid():
-        new_dict = dict_form.save(commit=False)
-        # Set to which post does the dictionary relate to.
-        new_dict.blog_post = blog_post
-        # Set the owner of the new dictionary.
-        new_dict.owner = request.user
-        new_dict.save()
-        # Return to the same post after saving the new dictionary.
-
 
 def translate_text(input_language,source_language,target_language):
     # Instantiates a client

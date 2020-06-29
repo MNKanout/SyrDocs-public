@@ -10,7 +10,7 @@ from .models import BlogPost
 from .forms import BlogPostform
 from dictionaries.models import Dictionary
 from dictionaries.forms import Dictionaryform, Translateform
-from dictionaries.views import translate_text, show_dictionaries, dictionary_form
+from dictionaries.views import translate_text, show_dictionaries, dictionary
 
 def check_owner(request,blog):
     """Check the owner of the blog post"""
@@ -24,7 +24,6 @@ def index(request):
 @login_required
 def blog_posts(request,):
     """Show all blog posts"""
-    print(request.GET.get)
     if request.GET.get('newest'):
         blogs = BlogPost.objects.filter(owner=request.user).order_by('date_added')
         user = request.user
@@ -54,7 +53,7 @@ def blog_post(request,post_pk):
     if request.method != 'POST':
         dict_form = Dictionaryform()
     else:
-        dictionary_form(request,blog_post,post_pk)
+        dictionary(request,blog_post,post_pk)
         return redirect('blogs:blog_post',post_pk)
         
     # Translations section

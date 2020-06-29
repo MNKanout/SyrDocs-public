@@ -9,7 +9,7 @@ urlpatterns = [
     # Blog post app urls
     path('',include('blogs.urls')),
     # Dictionary app urls
-    path('edit_dictionary/',include('dictionaries.urls')),
+    path('dictionary/',include('dictionaries.urls')),
     # Users app urls
     path('users/',include('users.urls')),
     # Tinymce urls
