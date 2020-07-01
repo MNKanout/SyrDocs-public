@@ -51,11 +51,16 @@ def blog_post(request,post_pk):
         
     if request.method == 'GET':
         # Display empty forms
-        source_language = request.session['source_language']
-        target_language = request.session['target_language'] 
-
         dict_form = Dictionaryform() # Dictionary form
-        trans_form = Translateform(initial={'source_language':source_language,'target_language':target_language}) # Translation form
+        try:
+            source_language = request.session['source_language']
+            target_language = request.session['target_language']
+            # Translation form
+            trans_form = Translateform(initial={'source_language':source_language,'target_language':target_language})
+            
+        except KeyError:
+            # Translation form
+            trans_form = Translateform()
         translation = ''
     else:
         dict_form = Dictionaryform() # Dictionary form
