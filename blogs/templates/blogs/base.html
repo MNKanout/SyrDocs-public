@@ -9,12 +9,13 @@
     <title>SharedLearning</title>
     {% bootstrap_css %}
     <link rel="stylesheet" href="{% static 'style/main.css' %}" type="text/css">
+    <link href="{% static 'open-iconic/font/css/open-iconic-bootstrap.css' %}" rel="stylesheet">
     {% bootstrap_javascript jquery='full' %}
   </head>
 
 <body>
     <header>
-        <nav class="navbar customNav navbar-expand-md navbar-expand-md sticky-top mb-4 pb-2 navbar-dark">
+        <nav class="navbar customNav navbar-expand-md sticky-top mb-4 pb-2 navbar-dark">
             <a class="navbar-brand" id="customBrand"
             href="{% url 'blogs:index' %}">SharedLearning<sup>Alpha</sup></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"

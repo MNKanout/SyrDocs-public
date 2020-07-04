@@ -19,6 +19,7 @@ def check_owner(request,dictionary):
 @login_required
 def dictionary(request,post_pk):
     """Display a form for entering a new dictionary"""
+    print(request.POST)
     blog_post = get_object_or_404(BlogPost,pk=post_pk)
     dict_form = Dictionaryform(data=request.POST)
     if dict_form.is_valid():

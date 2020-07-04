@@ -12,6 +12,10 @@
 .customNav button {
     color: #f1faee;
 }
+.iconButton {
+    border: none;
+    background-color: transparent;
+}
 #customBrand {
     color: #a8dadc;
 }

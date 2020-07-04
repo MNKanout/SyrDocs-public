@@ -47,11 +47,11 @@ def blog_post(request,post_pk):
     "Show blog post"
     # Blog post section
     blog_post = get_object_or_404(BlogPost,pk=post_pk)
+    dict_form = Dictionaryform() # Dictionary form
     check_owner(request,blog_post)
         
     if request.method == 'GET':
         # Display empty forms
-        dict_form = Dictionaryform() # Dictionary form
         try:
             source_language = request.session['source_language']
             target_language = request.session['target_language']
@@ -62,8 +62,8 @@ def blog_post(request,post_pk):
             # Translation form
             trans_form = Translateform()
         translation = ''
+        
     else:
-        dict_form = Dictionaryform() # Dictionary form
         trans_form = Translateform(request.POST) # Translation form
         translation = translate_(request)
         
