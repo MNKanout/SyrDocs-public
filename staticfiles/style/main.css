@@ -12,6 +12,13 @@
 .customNav button {
     color: #f1faee;
 }
+.iconButton {
+    border: none;
+    background-color: transparent;
+}
+.dictionaryItem {
+    list-style: none;
+}
 #customBrand {
     color: #a8dadc;
 }
@@ -22,4 +29,9 @@
     text-align: center; 
     background-color:#457b9d;
     color:#f1faee ;
+}
+#dictionaryList {
+    margin-top: 0.5rem;
+    border-style: double;
+    padding-left: 2rem;
 }
