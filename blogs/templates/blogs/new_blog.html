@@ -6,19 +6,15 @@
 {% endblock page_header %}
 
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <form class="form-group" action="{% url 'blogs:new_blog' %}" method="post">
-                {% csrf_token %}
-                {{ form.media }}
-                {% bootstrap_form form %}  
-                <button class="btn btn-primary btn-md" name="submit"
-                type="submit">Add post</button>
-            </form>
-        </div>
+<div class="row">
+    <div class="col">
+        <form class="form-group" action="{% url 'blogs:new_blog' %}" method="post">
+            {% csrf_token %}
+            {{ form.media }}
+            {% bootstrap_form form %}  
+            <button class="btn btn-primary btn-md" name="submit"
+            type="submit">Add post</button>
+        </form>
     </div>
 </div>
-
-
 {% endblock content %}
