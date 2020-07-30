@@ -64,6 +64,7 @@ def blog_post(request,post_pk):
             
         except KeyError: # Requesting the page for the first time.
             trans_form = Translateform()
+            scroll = 0
 
         
     else: # POST REQUEST
