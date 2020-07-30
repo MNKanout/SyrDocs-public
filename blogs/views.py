@@ -1,6 +1,6 @@
 #Builtin modules
 from django.shortcuts import render, redirect
-from  django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
@@ -47,28 +47,40 @@ def blog_post(request,post_pk):
     "Show blog post"
     # Blog post section
     blog_post = get_object_or_404(BlogPost,pk=post_pk)
-    dict_form = Dictionaryform() # Dictionary form
-    check_owner(request,blog_post)
+    dict_form = Dictionaryform() # initilize dcitionary form
+    check_owner(request,blog_post) 
         
     if request.method == 'GET':
-        # Display empty forms
-        try:
+        try: # Requesting the page after a previous form submition.
             source_language = request.session['source_language']
             target_language = request.session['target_language']
-            # Translation form
-            trans_form = Translateform(initial={'source_language':source_language,'target_language':target_language})
+
+            # Set selcted choices as the new initials
+            trans_form = Translateform(initial={'source_language':source_language,'target_language':target_language,})
             
-        except KeyError:
-            # Translation form
+        except KeyError: # Requesting the page for the first time.
             trans_form = Translateform()
-        translation = ''
+
         
-    else:
-        trans_form = Translateform(request.POST) # Translation form
+    else: # POST REQUEST
+        # Assign POST request values to corresponding variables.
+        source_language = request.POST['source_language']
+        target_language = request.POST['target_language']
+        input_langauge = request.POST['input_langauge']
+        # Send the translation request to GOOGLE API
+        trans_form = Translateform(request.POST)
         translation = translate_(request)
-        
+        # Set selcted choices as the new initials for next page request
+        trans_form = Translateform(initial={
+            'source_language':source_language,
+            'target_language':target_language,
+            'input_langauge':input_langauge,
+            'output_langauge':translation,})
+
+    # Get a list of saved dictionaries
     dictionaries = show_dictionaries(request,blog_post)
-    context = {'blog_post':blog_post,'post_pk':post_pk,'dict_form':dict_form,'trans_form':trans_form,'dictionaries':dictionaries,'translation':translation}
+
+    context = {'blog_post':blog_post,'post_pk':post_pk,'dict_form':dict_form,'trans_form':trans_form,'dictionaries':dictionaries}
     return render(request,'blogs/blog_post.html',context)
 
 @login_required

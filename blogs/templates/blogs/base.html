@@ -8,6 +8,8 @@
     shrink-to-fit=no">
     <title>SharedLearning</title>
     {% bootstrap_css %}
+
+    <link rel="icon" href="{% static 'favicon_io/favicon-32x32.png' %}" type="image/icon type">
     <link rel="stylesheet" href="{% static 'style/main.css' %}" type="text/css">
     <link href="{% static 'open-iconic/font/css/open-iconic-bootstrap.css' %}" rel="stylesheet">
     {% bootstrap_javascript jquery='full' %}
@@ -15,16 +17,16 @@
 
 <body>
     <header>
-        <nav class="navbar customNav navbar-expand-md sticky-top mb-4 pb-2 navbar-dark">
-            <a class="navbar-brand" id="customBrand"
-            href="{% url 'blogs:index' %}">SharedLearning<sup>Alpha</sup></a>
+        <nav class="navbar customNav navbar-expand-md sticky-top mb-4 pb-2 navbar-light">
+            <a id="customBrand"
+            href="{% url 'blogs:index' %}"><img id="logo" src="{% static 'style/images/sl_logo_text_v8.png' %}"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"
                 data-target="#navbarCollapse"><span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <!--Left side navigation bar -->
-                <ul class="navbar-nav mr-auto">
+                <ul class="navbar-nav pl-4 mr-auto">
                     <li class="nav-item">
                         <a class="nav-link"
                         href="{% url 'blogs:index' %}">Home</a></li>
@@ -66,9 +68,12 @@
             {% block content %} {% endblock content %}
         </div>
     </main>
+    <br>
+    <br>
+    <br>
     
-    <footer id="customFooter">
-        <p>Syrwegian &copy;2020</p>
+    <footer>
+        {% block footer %} {% endblock footer %}
     </footer>
 </body>
 </html>
