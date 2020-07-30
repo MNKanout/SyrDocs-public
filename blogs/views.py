@@ -52,8 +52,11 @@ def blog_post(request,post_pk):
         
     if request.method == 'GET':
         try: # Requesting the page after a previous form submition.
+            print(request.GET.get)
             source_language = request.session['source_language']
             target_language = request.session['target_language']
+            if request.session['scroll']:
+                scroll = request.session['scroll']
 
             # Set selcted choices as the new initials
             trans_form = Translateform(initial={'source_language':source_language,'target_language':target_language,})
@@ -64,6 +67,8 @@ def blog_post(request,post_pk):
         
     else: # POST REQUEST
         # Assign POST request values to corresponding variables.
+        scroll = request.POST['scroll']
+        request.session['scroll'] = scroll
         source_language = request.POST['source_language']
         target_language = request.POST['target_language']
         input_langauge = request.POST['input_langauge']
@@ -80,7 +85,7 @@ def blog_post(request,post_pk):
     # Get a list of saved dictionaries
     dictionaries = show_dictionaries(request,blog_post)
 
-    context = {'blog_post':blog_post,'post_pk':post_pk,'dict_form':dict_form,'trans_form':trans_form,'dictionaries':dictionaries}
+    context = {'blog_post':blog_post,'post_pk':post_pk,'dict_form':dict_form,'trans_form':trans_form,'dictionaries':dictionaries,'scroll':scroll}
     return render(request,'blogs/blog_post.html',context)
 
 @login_required

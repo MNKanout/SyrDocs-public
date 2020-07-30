@@ -56,4 +56,5 @@ class Translateform(forms.Form):
             'placeholder':'Translation',
             'class':'form-control',
             'autocomplete':'off',
+            'disabled':'true',
             }))
