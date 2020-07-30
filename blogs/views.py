@@ -52,11 +52,12 @@ def blog_post(request,post_pk):
         
     if request.method == 'GET':
         try: # Requesting the page after a previous form submition.
-            print(request.GET.get)
             source_language = request.session['source_language']
             target_language = request.session['target_language']
             if request.session['scroll']:
                 scroll = request.session['scroll']
+            else:
+                scroll = 0
 
             # Set selcted choices as the new initials
             trans_form = Translateform(initial={'source_language':source_language,'target_language':target_language,})
