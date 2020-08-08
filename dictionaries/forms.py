@@ -33,7 +33,7 @@ languages = (
 class Translateform(forms.Form):
     """A simple translation form"""
     # Select source Language
-    source_language = forms.TypedChoiceField(choices=languages, label='',initial='test initial',
+    source_language = forms.TypedChoiceField(choices=languages, label='',
     widget=(forms.Select(attrs={
         'class':'form-control',
         })))
