@@ -9,7 +9,7 @@ from django.urls import reverse
 from .models import BlogPost
 from .forms import BlogPostform
 from dictionaries.models import Dictionary
-from dictionaries.forms import Dictionaryform, Translateform
+from dictionaries.forms import Dictionaryform
 from dictionaries.views import translate_, show_dictionaries, dictionary
 
 def check_owner(request,blog):
@@ -60,10 +60,10 @@ def blog_post(request,post_pk):
                 scroll = 0
 
             # Set selcted choices as the new initials
-            trans_form = Translateform(initial={'source_language':source_language,'target_language':target_language,})
+            dict_form = Dictionaryform(initial={'source_language':source_language,'target_language':target_language,})
             
         except KeyError: # Requesting the page for the first time.
-            trans_form = Translateform()
+            trans_form = Dictionaryform
             scroll = 0
 
         
@@ -75,10 +75,10 @@ def blog_post(request,post_pk):
         target_language = request.POST['target_language']
         input_langauge = request.POST['input_langauge']
         # Send the translation request to GOOGLE API
-        trans_form = Translateform(request.POST)
+        dict_form = Dictionaryform(request.POST)
         translation = translate_(request)
         # Set selcted choices as the new initials for next page request
-        trans_form = Translateform(initial={
+        dict_form = Dictionaryform(initial={
             'source_language':source_language,
             'target_language':target_language,
             'input_langauge':input_langauge,
@@ -87,7 +87,7 @@ def blog_post(request,post_pk):
     # Get a list of saved dictionaries
     dictionaries = show_dictionaries(request,blog_post)
 
-    context = {'blog_post':blog_post,'post_pk':post_pk,'dict_form':dict_form,'trans_form':trans_form,'dictionaries':dictionaries,'scroll':scroll}
+    context = {'blog_post':blog_post,'post_pk':post_pk,'dict_form':dict_form,'dictionaries':dictionaries,'scroll':scroll}
     return render(request,'blogs/blog_post.html',context)
 
 @login_required

@@ -52,14 +52,14 @@
     action="{% url 'blogs:blog_post' post_pk %}">
     {% csrf_token %}
     <div id="topform" class="input-group">
-      {{ trans_form.source_language }}
-      {{ trans_form.target_language }} 
-      {{ trans_form.input_langauge }}
+      {{ dict_form.source_language }}
+      {{ dict_form.target_language }} 
+      {{ dict_form.input_langauge }}
       <!-- Get scroll position -->
       <input id="scrollPosition" type="hidden" name="scroll">
     </div>
     <div class="input-group">
-      {{ trans_form.output_langauge }} 
+      {{ dict_form.output_langauge }} 
       <button onclick="getscroll()" class="btn btn-primary pl-2 pr-2 ml-1" 
       type="submit" name="translate" value="post">Translate</button>
       <button onclick="getscroll()" class="btn btn-primary pl-2 pr-2 ml-1" 
