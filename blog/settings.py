@@ -60,7 +60,6 @@ INSTALLED_APPS = [
 
     #Thirdparty apps
     'bootstrap4',
-    'ckeditor',
     'tinymce',
 
     #Default apps
