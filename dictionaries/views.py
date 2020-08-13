@@ -7,12 +7,12 @@ from django.http import Http404
 from google.cloud import translate_v2 as translate
 #Project modules
 from .models import Dictionary
-from .forms import Dictionaryform, Translateform
+from .forms import Dictionaryform
 from blogs.models import BlogPost
 
 def check_owner(request,dictionary):
     """Check the owner of the dictionary"""
-    if request.user != dictionary.owner:
+    if request.user != dictionary.owner_id:
         raise Http404
 
 
@@ -26,7 +26,7 @@ def dictionary(request,post_pk):
         # Set to which post does the dictionary belonge to.
         new_dict.blog_post = blog_post
         # Set the owner of the new dictionary.
-        new_dict.owner = request.user
+        new_dict.owner_id = request.user
         new_dict.save()
         return redirect('blogs:blog_post',post_pk)
     
@@ -40,18 +40,12 @@ def delete(request,blog_post_id,word_id):
         dictionary.delete()
         return redirect('blogs:blog_post', blog_post_id)
 
-@login_required
-def show_dictionaries(request,blog_post):
-    """Return all user's dictionaries related to a spesifc post"""
-    dictionaries = blog_post.dictionary_set.filter(owner=request.user).order_by('word_name')
-    return dictionaries
-
 def translate_(request):
-    trans_form = Translateform(request.POST)
-    if trans_form.is_valid():
-        source_language = trans_form.cleaned_data['source_language']
-        target_language = trans_form.cleaned_data['target_language']
-        input_langauge = trans_form.cleaned_data['input_langauge']
+    dict_form = Dictionaryform(request.POST)
+    if dict_form.is_valid():
+        source_language = dict_form.cleaned_data['source_language']
+        target_language = dict_form.cleaned_data['target_language']
+        input_langauge = dict_form.cleaned_data['text']
         # Set new defaults
         request.session['source_language'] = source_language
         request.session['target_language'] = target_language

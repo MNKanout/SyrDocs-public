@@ -10,7 +10,7 @@ from .models import BlogPost
 from .forms import BlogPostform
 from dictionaries.models import Dictionary
 from dictionaries.forms import Dictionaryform
-from dictionaries.views import translate_, show_dictionaries, dictionary
+from dictionaries.views import translate_, dictionary
 
 def check_owner(request,blog):
     """Check the owner of the blog post"""
@@ -47,7 +47,6 @@ def blog_post(request,post_pk):
     "Show blog post"
     # Blog post section
     blog_post = get_object_or_404(BlogPost,pk=post_pk)
-    dict_form = Dictionaryform() # initilize dcitionary form
     check_owner(request,blog_post) 
         
     if request.method == 'GET':
@@ -63,29 +62,45 @@ def blog_post(request,post_pk):
             dict_form = Dictionaryform(initial={'source_language':source_language,'target_language':target_language,})
             
         except KeyError: # Requesting the page for the first time.
-            trans_form = Dictionaryform
+            dict_form = Dictionaryform()
             scroll = 0
 
         
     else: # POST REQUEST
         # Assign POST request values to corresponding variables.
-        scroll = request.POST['scroll']
-        request.session['scroll'] = scroll
+        scroll = request.POST['scroll'] #Get scroll position
+        request.session['scroll'] = scroll # Set scroll positon
+    
         source_language = request.POST['source_language']
         target_language = request.POST['target_language']
-        input_langauge = request.POST['input_langauge']
-        # Send the translation request to GOOGLE API
-        dict_form = Dictionaryform(request.POST)
-        translation = translate_(request)
-        # Set selcted choices as the new initials for next page request
-        dict_form = Dictionaryform(initial={
-            'source_language':source_language,
-            'target_language':target_language,
-            'input_langauge':input_langauge,
-            'output_langauge':translation,})
+        text = request.POST['text']
+
+        if request.POST.get('translate'):
+            translation = translate_(request)
+            # Set selcted choices as the new initials for next page requests
+            dict_form = Dictionaryform(initial={
+                'source_language':source_language,
+                'target_language':target_language,
+                'text':text,
+                'translation':translation,
+                })
+
+        elif request.POST.get('save'):
+            print(request.POST.get)
+            translation = translate_(request)
+            blog_post = get_object_or_404(BlogPost,pk=post_pk)
+            dict_form = Dictionaryform(data=request.POST)
+            if dict_form.is_valid():
+                new_dict = dict_form.save(commit=False)
+                # Set to which post does the dictionary belonge to.
+                new_dict.post_id = blog_post
+                # Set the owner of the new dictionary.
+                new_dict.owner_id = request.user
+                new_dict.save()
+                return redirect('blogs:blog_post',post_pk)
 
     # Get a list of saved dictionaries
-    dictionaries = show_dictionaries(request,blog_post)
+    dictionaries = blog_post.dictionary_set.filter(owner_id=request.user).order_by('text')
 
     context = {'blog_post':blog_post,'post_pk':post_pk,'dict_form':dict_form,'dictionaries':dictionaries,'scroll':scroll}
     return render(request,'blogs/blog_post.html',context)

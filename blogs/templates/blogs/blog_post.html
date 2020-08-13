@@ -32,7 +32,7 @@
       <form class="mt-2" 
         action="{% url 'dictionaries:delete' blog_post.id dictionary.id %}" method="POST">
         {% csrf_token %}
-        {{dictionary.word_translation}}
+        {{dictionary.translation}}
       <button class="iconButton" type="submit" name="dictionary" value="delete"><span class="oi oi-trash"></span></button>
       </form>
     </li>
@@ -54,16 +54,16 @@
     <div id="topform" class="input-group">
       {{ dict_form.source_language }}
       {{ dict_form.target_language }} 
-      {{ dict_form.input_langauge }}
+      {{ dict_form.text }}
       <!-- Get scroll position -->
       <input id="scrollPosition" type="hidden" name="scroll">
     </div>
     <div class="input-group">
-      {{ dict_form.output_langauge }} 
+      {{ dict_form.translation }} 
       <button onclick="getscroll()" class="btn btn-primary pl-2 pr-2 ml-1" 
       type="submit" name="translate" value="post">Translate</button>
       <button onclick="getscroll()" class="btn btn-primary pl-2 pr-2 ml-1" 
-      type="submit" name="dictionary" value="post">Save</button>
+      type="submit" name="save" value="post">Save</button>
     </div>  
   </form>
 </div>
