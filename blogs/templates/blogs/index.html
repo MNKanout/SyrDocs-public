@@ -1,41 +1,46 @@
 {% extends 'blogs/base.html' %}
 {% block page_header %}
 <div class="jumbotron text-left shadow">
-    <h1 class="display-5 font-weight-bold">SharedLearning</h1>
-    <p>Is a social media learning platform that gives you the tools that you need when learning in forgin languages. New featuers and languages will be added gradualy to ensure best user experince.</p>
-    <a class="btn btn-danger btn-lg" role= "button"
-    href="{% url 'blogs:new_blog' %}">Start now</a>
+    <h1 class="display-4 font-weight-bold">SharedLearning</h1>
+    <h5 class="ml-2"> Is a learning platform made to make learning in a new language easier and more efficient. Aimed towards professionals and academic students studying in foreign languages.</h5>
+    <a class="btn btn-primary btn-lg mt-4" role= "button"
+    href="{% url 'blogs:new_blog' %}">Get started</a>
 </div>
 {% endblock page_header %}
 {% block content %}
 <div class="container">
     <div class="row">
         <div class="col">
-            <h3 class="display-4">Getting started?</h3>
+            <h3 class="display-4">Why SharedLearning?</h3>
         </div>
     </div>
     <div class="row">
         <div class="col">
-            <h5>It's very simple! Just follow the simple steps below and you should be good to go! If you have any question, don't hesitate to send us an e-mail, and we will be happy to replay to you as soon as possible!</h5>
+            <h5 class="ml-2">SharedLearning offers you the tools to make your learning experience more efficient and reliable. With new features added with every patch to make your experience even better! Here is some of the reasons on why to use SharedLearning:</h5>
         </div>
     </div>
-    <div class="row">
+    <div class="row mt-2">
         <div class="col">
             <ol>
-                <li class="lead">Create your free account</li>
-                <li class="lead">Write your first post</li>
-                <li class="lead">Add your first word in the mini dictionary</li>
+                <li class="lead">Add as many posts as you would like!</li>
+                <li class="lead">Get instant feedback on spelling mistakes when adding new posts.</li>
+                <li class="lead">Translate new words on the go while reading.</li>
+                <li class="lead">Support translation from/to all languages.</li>
+                <li class="lead">Save new words with a simple click to your mini dictionary.</li>
+                <li class="lead">Each post has it's own unique mini dictionary. </li>
+                <li class="lead">Ability to edit translations before saving.</li>
+                <li class="lead">Hidden translations for revision day!</li>
             </ol>
         </div>
     </div>
     <div class="row">
         <div class="col">
-            <h3 class="display-4">Alpha release?</h3>
+            <h3 class="display-4">Pre-Alpha release?</h3>
         </div>
     </div>
     <div class="row">
         <div class="col">
-            <h5>An Alpha release means that the website is working correctly, but it might experince some issues which should be fixed in upcoming patches.</h5>
+            <h5 class="ml-2">This means that the website is a work in progress. It has basic functionalities with basic styling. The aim of this release is to ensure that all the basic functions are working, in addition to fix any bug that users might incounter.</h5>
         </div>
     </div>
 </div>

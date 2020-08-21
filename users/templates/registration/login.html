@@ -9,9 +9,9 @@
 <form class="form-group" method="POST" action="{% url 'users:login' %}">
     {% csrf_token %}
     {% bootstrap_form form %}
-    <button class="btn btn-primary btn-lg" type="submit">Login</button>
+    <button class="btn btn-primary btn" type="submit">Login</button>
     <input type="hidden" name="next" value="{% url 'blogs:index' %}">
-    <a class="btn btn-primary btn-lg" href="{% url 'users:register' %}">Register</a>
+    <a class="btn btn-primary btn" href="{% url 'users:register' %}">Register</a>
 </form>
 
 {% endblock content %}
