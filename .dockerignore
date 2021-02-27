@@ -1,0 +1,8 @@
+.gitignore
+Dockerfile
+.idea
+win-venv
+venv
+/staticfiles
+/docker_files
+

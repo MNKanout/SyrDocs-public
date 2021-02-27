@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  nginx:
+    build: ./nginx
+    ports:
+      - 80:80
+    volumes:
+      - static_volume:/app/static
+    depends_on:
+      - django
+
+    restart: "on-failure"
+
+  django:
+    build: .
+    command: sh -c "python3 manage.py makemigrations &&
+                      python3 manage.py migrate &&
+                      python3 manage.py collectstatic &&
+                      gunicorn blog.wsgi:application --bind 0.0.0.0:8000"
+    volumes:
+      - static_volume:/app/static
+
+    restart: "on-failure"
+    env_file: .env
+
+
+volumes:
+  static_volume:

@@ -124,6 +124,7 @@ ENV/
 env.bak/
 venv.bak/
 winvenv/
+win-venv/
 
 # Spyder project settings
 .spyderproject
@@ -160,3 +161,8 @@ image.json
 =======
 image.json
 >>>>>>> d38810d9e17a820fbec42957ec0187f032ee0565
+
+
+#extra
+key.json
+.env
