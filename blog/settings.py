@@ -87,8 +87,17 @@ django_heroku.settings(locals())
 try:
     with open("config.json") as f:
         data = json.load(f)
+    #Core
     SECRET_KEY = data['SECRET_KEY']
-    DEBUG = data["DEBUG"]
+
+    #Debug
+    debug = data["DEBUG"]
+    if debug == "True":
+        DEBUG = True
+    else:
+        DEBUG = False
+    
+    # Database
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -99,11 +108,17 @@ try:
             'PORT': '5432',
         }
     }
+except:
+    print("No config file found, switching to enviroment variables")
 
 # Get credentials from enviroment variables
-except "No config file":
+finally:
     SECRET_KEY = os.environ.get('SECRET_KEY')
-    DEBUG = os.environ.get('DEBUG')
+    debug = os.environ.get('DEBUG')
+    if debug == "True":
+        DEBUG = True
+    else:
+        DEBUG = False
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
