@@ -93,6 +93,17 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 #DATABASE_URL
 django_heroku.settings(locals())
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mydatabase',
+        'USER': 'mydatabaseuser',
+        'PASSWORD': 'mypassword',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
+}
+
 
 
 # Password validation
