@@ -83,36 +83,38 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 #DATABASE_URL
 django_heroku.settings(locals())
 
+
+
 # Get credentials from config file
 try:
     with open("config.json") as f:
         data = json.load(f)
-    #Core
-    SECRET_KEY = data['SECRET_KEY']
+        print(data["NAME"])
+        #Core
+        SECRET_KEY = data['SECRET_KEY']
 
-    #Debug
-    debug = data["DEBUG"]
-    if debug == "True":
-        DEBUG = True
-    else:
-        DEBUG = False
+        #Debug
+        debug = data["DEBUG"]
+        if debug == "True":
+            DEBUG = True
+        else:
+            DEBUG = False
     
-    # Database
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': data["NAME"],
-            'USER': data["USER"],
-            'PASSWORD': data["PASSWORD"],
-            'HOST': data["HOST"],
-            'PORT': '5432',
+        # Database
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql',
+                'NAME': data["NAME"],
+                'USER': data["USER"],
+                'PASSWORD': data["PASSWORD"],
+                'HOST': data["HOST"],
+                'PORT': '5432',
+            }
         }
-    }
+        
+# Get credentials from enviroment variables
 except:
     print("No config file found, switching to enviroment variables")
-
-# Get credentials from enviroment variables
-finally:
     SECRET_KEY = os.environ.get('SECRET_KEY')
     debug = os.environ.get('DEBUG')
     if debug == "True":

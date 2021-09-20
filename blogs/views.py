@@ -25,19 +25,19 @@ def index(request):
 def blog_posts(request,):
     """Show all blog posts"""
     if request.GET.get('newest'):
-        blogs = BlogPost.objects.filter(owner=request.user).order_by('date_added')
+        blogs = BlogPost.objects.filter(owner=request.user).order_by('date_added')[:15]
         user = request.user
         context = {'blogs':blogs,'user':user}
         return render(request,'blogs/blog_posts.html',context)
 
     elif request.GET.get('oldest'):
-        blogs = BlogPost.objects.filter(owner=request.user).order_by('-date_added')
+        blogs = BlogPost.objects.filter(owner=request.user).order_by('-date_added')[:15]
         user = request.user
         context = {'blogs':blogs,'user':user}
         return render(request,'blogs/blog_posts.html',context)
 
     else:
-        blogs = BlogPost.objects.filter(owner=request.user).order_by('-date_added')
+        blogs = BlogPost.objects.filter(owner=request.user).order_by('-date_added')[:15]
         user = request.user
         context = {'blogs':blogs,'user':user}
         return render(request,'blogs/blog_posts.html',context)
