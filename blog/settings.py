@@ -1,5 +1,6 @@
 import os
 import django_heroku
+import json
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -93,16 +94,30 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 #DATABASE_URL
 django_heroku.settings(locals())
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'knjsqcfd',
-        'USER': 'knjsqcfd',
-        'PASSWORD': 'ywPC3WZA4uiWb982lwDOvlpEfMC960Jw',
-        'HOST': 'hattie.db.elephantsql.com',
-        'PORT': '5432',
+try:
+    with open("config.json") as f:
+        data = json.load(f)
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': data["NAME"],
+            'USER': data["USER"],
+            'PASSWORD': data["PASSWORD"],
+            'HOST': data["HOST"],
+            'PORT': '5432',
+        }
     }
-}
+except "No config file":
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ.get("NAME"),
+            'USER': os.environ.get("USER"),
+            'PASSWORD': os.environ.get("PASSWORD"),
+            'HOST': os.environ.get("HOST"),
+            'PORT': '5432',
+        }
+    }
 
 
 

@@ -11,6 +11,7 @@ __pycache__/
 <<<<<<< HEAD
 #backups
 backup.json
+config.json
 
 =======
 >>>>>>> 457b9298beaea9e3042dfe2439eea9366babcbe9
@@ -166,3 +167,4 @@ image.json
 #extra
 key.json
 .env
+/static
