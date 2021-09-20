@@ -90,19 +90,8 @@ TEMPLATES = [
 WSGI_APPLICATION = 'blog.wsgi.application'
 
 
-#Read DatabaseURL
+#DATABASE_URL
 django_heroku.settings(locals())
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': os.environ.get('NAME'),
-#         'USER': os.environ.get('USER'),
-#         'PASSWORD': os.environ.get('PASSWORD'),
-#         'HOST': os.environ.get('HOST'),
-#         'PORT': os.environ.get('PORT'),
-#     }
-# }
 
 
 
