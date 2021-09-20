@@ -96,10 +96,10 @@ django_heroku.settings(locals())
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mydatabase',
-        'USER': 'mydatabaseuser',
-        'PASSWORD': 'mypassword',
-        'HOST': '127.0.0.1',
+        'NAME': 'knjsqcfd',
+        'USER': 'knjsqcfd',
+        'PASSWORD': 'ywPC3WZA4uiWb982lwDOvlpEfMC960Jw',
+        'HOST': 'hattie.db.elephantsql.com',
         'PORT': '5432',
     }
 }
