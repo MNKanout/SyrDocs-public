@@ -6,18 +6,7 @@ import json
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-# Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
-
-# SECURITY WARNING: don't run with debug turned on in production!
-debug = os.environ.get('DEBUG')
-if debug == 'True':
-    DEBUG = True
-else:
-    DEBUG = False
 
 ALLOWED_HOSTS = ['syrwegian.com','45.132.241.24','localhost',"syrnotebook-0-1.herokuapp.com"]
 
@@ -94,9 +83,12 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 #DATABASE_URL
 django_heroku.settings(locals())
 
+# Get credentials from config file
 try:
     with open("config.json") as f:
         data = json.load(f)
+    SECRET_KEY = data['SECRET_KEY']
+    DEBUG = data["DEBUG"]
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -107,7 +99,11 @@ try:
             'PORT': '5432',
         }
     }
+
+# Get credentials from enviroment variables
 except "No config file":
+    SECRET_KEY = os.environ.get('SECRET_KEY')
+    DEBUG = os.environ.get('DEBUG')
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
