@@ -168,3 +168,6 @@ image.json
 key.json
 .env
 /static
+.gcloudignore
+app.yaml
+google_conf/
