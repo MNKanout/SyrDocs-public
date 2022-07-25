@@ -10,46 +10,38 @@
 
 {% block content %}
 <!-- Sort by form-->
-<div class="d-flex flex-row bd-highlight mb-3">
-    <p style="display: inline;">Sort by:</p>
-    <form style="display: inline;" method="GET" action="{% url 'blogs:blog_posts' %}">
-        <button class="btn btn-sm text-info" type="submit" 
+<div class="d-flex justify-content-between">
+    <span class="py-2">Sort by:</span>
+    <form method="GET" action="{% url 'blogs:blog_posts' %}">
+        <button class="btn text-info" type="submit" 
             name="oldest" value="post">Newest</button>
-        <button class="btn btn-sm text-info" type="submit" 
+        <button class="btn text-info" type="submit" 
             name="newest" value="post">Oldest</button>
     </form>
 </div>
 <!-- end of sort by form-->
 
 <!-- List of blog posts -->
-<div class="row">
-    <div class="col">
-        <ul class="navbar-nav">
-            {% for blog in blogs %}
-            <li class="nav-item bg-light pd-2 mb-4 shadow-sm">
-                <a href="{% url 'blogs:blog_post' blog.id %}" 
-                    style="text-decoration:   none; color: black;">
-                    <h4>{{blog.title.title}}</h4>
-                    <p>{{blog.date_added}} By {{blog.owner}}</p>
-                    <h6 class="navbar-text">{{blog.text|slice:'255'|safe}}.....</h6>
-                    <div class="row mb-2">
-                        <div class="col">
-                            {% if blog.owner == user %}
-                            <a class="btn btn-info"
-                                href="{% url 'blogs:edit_blog' blog.id %}">Edit</a>
-                            <a class="btn btn-danger" 
-                                href="{% url 'blogs:del_post' blog.id %}">Delete</a>
-                            {% endif %}
-                        </div>
-                    </div>
-                </a>
-            </li>
-            {% empty %}
-            <p>No blogs were add</p>
-            {% endfor %}
-        </ul>
+<div class="d-flex flex-column">
+    {% for blog in blogs %}
+    <div class="nav-item bg-light p-2 mb-4 shadow-sm card">
+        <a href="{% url 'blogs:blog_post' blog.id %}"
+            style="text-decoration:   none; color: black;" class="stretched-link">
+            <div class="d-flex justify-content-between">
+                <h5>{{blog.category}}</h5>
+                <a href="{% url 'blogs:del_post' blog.id %}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 8 8">
+                    <path d="M1.41 0l-1.41 1.41.72.72 1.78 1.81-1.78 1.78-.72.69 1.41 1.44.72-.72 1.81-1.81 1.78 1.81.69.72 1.44-1.44-.72-.69-1.81-1.78 1.81-1.81.72-.72-1.44-1.41-.69.72-1.78 1.78-1.81-1.78-.72-.72z" />
+                </svg></a>
+            </div>
+        <p>{{blog.title.title}}</p>
+        <span>{{blog.date_added}}</span>
+        </a>
     </div>
 </div>
+    {% empty %}
+    <p>Create a new post to get started!</p>
+    {% endfor %}
 <!--End of the list of blog posts-->
 
 {% endblock content %}
