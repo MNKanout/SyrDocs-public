@@ -10,13 +10,26 @@
 
 {% block content %}
 <!-- Sort by form-->
-<div class="d-flex justify-content-between">
+<div class="mb-3">
     <span class="py-2">Sort by:</span>
     <form method="GET" action="{% url 'blogs:blog_posts' %}">
+        <div class="btn-group dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" 
+            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" 
+            aria-expanded="false">
+                category
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                {% for blog in blogs %}
+                <button class="dropdown-item" type="submit" href="#">{{blog.category}}</button>
+                {% endfor %}
+            </div>
+        </div>
         <button class="btn text-info" type="submit" 
             name="oldest" value="post">Newest</button>
         <button class="btn text-info" type="submit" 
             name="newest" value="post">Oldest</button>
+
     </form>
 </div>
 <!-- end of sort by form-->

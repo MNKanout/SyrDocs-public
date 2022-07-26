@@ -25,19 +25,19 @@ def index(request):
 def blog_posts(request,):
     """Show all blog posts"""
     if request.GET.get('newest'):
-        blogs = BlogPost.objects.filter(owner=request.user).order_by('date_added')[:15]
+        blogs = BlogPost.objects.filter(owner=request.user).order_by('date_added')[:]
         user = request.user
         context = {'blogs':blogs,'user':user}
         return render(request,'blogs/blog_posts.html',context)
 
     elif request.GET.get('oldest'):
-        blogs = BlogPost.objects.filter(owner=request.user).order_by('-date_added')[:15]
+        blogs = BlogPost.objects.filter(owner=request.user).order_by('-date_added')[:]
         user = request.user
         context = {'blogs':blogs,'user':user}
         return render(request,'blogs/blog_posts.html',context)
 
     else:
-        blogs = BlogPost.objects.filter(owner=request.user).order_by('-date_added')[:15]
+        blogs = BlogPost.objects.filter(owner=request.user).order_by('-date_added')[:]
         user = request.user
         context = {'blogs':blogs,'user':user}
         return render(request,'blogs/blog_posts.html',context)
@@ -113,6 +113,9 @@ def new_blog(request):
     else:
         form = BlogPostform(data=request.POST)
         if form.is_valid():
+            print(BlogPost.objects.filter(category=form.cleaned_data.get('category')))
+                #if form.cleaned_data.get['category'] == post.get["category"]:
+                #    print('found match')
             new_blog = form.save(commit=False)
             new_blog.owner = request.user
             new_blog.save()

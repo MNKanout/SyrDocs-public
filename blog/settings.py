@@ -22,12 +22,13 @@ CKEDITOR_CONFIGS = {
 TINYMCE_DEFAULT_CONFIG = {
     "selector": "textarea",
     "plugins": "export, pagebreak, code, emoticons, image, table, paste, lists, advlist, checklist, link, hr, charmap, directionality,table,spellchecker,paste,searchreplace,autoresize,directionality,export,fullpage",
-    "toolbar": "undo redo styleselect bold italic  toolbar alignleft aligncenter alignright forecolor backcolor linkimage ltr rtl fullpage export pagebreak | formatselect fontselect fontsizeselect bold italic underline strikethrough forecolor backcolor subscript superscript | alignleft aligncenter alignright alignjustify indent outdent rtl ltr | bullist numlist checklist | emoticons image table link hr charmap ",
+    "toolbar": "undo redo styleselect bold italic  toolbar alignleft aligncenter alignright forecolor backcolor linkimage fullpage export pagebreak | formatselect fontselect fontsizeselect bold italic underline strikethrough forecolor backcolor subscript superscript | alignleft aligncenter alignright alignjustify indent outdent rtl ltr | bullist numlist checklist | emoticons image table link hr charmap ",
     "custom_undo_redo_levels": 10,
     "menubar": False,
     "browser_spellcheck": True,
     "resize": False,
     "branding": False,
+    "toolbar_mode": "floating",
 }
 # Application definition
 INSTALLED_APPS = [
