@@ -1,9 +1,8 @@
-#Builtin modules
+'''Views for the blog posts application'''
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import get_object_or_404
-from django.urls import reverse
 
 # Poject modules
 from .models import BlogPost
@@ -18,29 +17,25 @@ def check_owner(request,blog):
         raise Http404
 
 def index(request):
-    """Showing the homepage"""
+    """Render the Home page"""
     return render(request,'blogs/index.html')
 
-@login_required
-def blog_posts(request,):
-    """Show all blog posts"""
-    if request.GET.get('newest'):
-        blogs = BlogPost.objects.filter(owner=request.user).order_by('date_added')[:]
-        user = request.user
-        context = {'blogs':blogs,'user':user}
-        return render(request,'blogs/blog_posts.html',context)
+def get_categories():
+    "Return all categoires"
+    return set([post.category for post in BlogPost.objects.all()])
 
-    elif request.GET.get('oldest'):
-        blogs = BlogPost.objects.filter(owner=request.user).order_by('-date_added')[:]
-        user = request.user
-        context = {'blogs':blogs,'user':user}
-        return render(request,'blogs/blog_posts.html',context)
+@login_required
+def blog_posts(request):
+    """Render the blog posts page"""
+    if request.GET.get('category'):
+        blogs = BlogPost.objects.all().filter(category=request.GET.get('category')).order_by('-date_added')
 
     else:
-        blogs = BlogPost.objects.filter(owner=request.user).order_by('-date_added')[:]
-        user = request.user
-        context = {'blogs':blogs,'user':user}
-        return render(request,'blogs/blog_posts.html',context)
+        blogs = BlogPost.objects.filter(owner=request.user).order_by('-date_added')
+
+    categories = get_categories()
+    context = {'blogs':blogs,"categories":categories}
+    return render(request,'blogs/blog_posts.html',context)
 
 @login_required
 def blog_post(request,post_pk):

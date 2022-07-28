@@ -2,34 +2,28 @@
 
 {% block page_header %}
 <div class="d-flex justify-content-between">
-    <h2 class='text'>Posts</h2>
+    <h2 class='text'>Documents</h2>
     <span><a class="btn btn-primary btn-md"
-    href="{% url 'blogs:new_blog' %}">Add a new post</a></span>
+    href="{% url 'blogs:new_blog' %}">New doc</a></span>
 </div>
 {% endblock page_header %}
 
 {% block content %}
-<!-- Sort by form-->
-<div class="mb-3">
-    <span class="py-2">Sort by:</span>
+<!-- Categories-->
+<div class="mb-3 d-flex">
     <form method="GET" action="{% url 'blogs:blog_posts' %}">
         <div class="btn-group dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" 
             id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" 
             aria-expanded="false">
-                category
+                Category
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                {% for blog in blogs %}
-                <button class="dropdown-item" type="submit" href="#">{{blog.category}}</button>
+                {% for category in categories %}
+                <button class="dropdown-item" type="submit" name="category" value="{{category}}" href="#">{{category}}</button>
                 {% endfor %}
             </div>
         </div>
-        <button class="btn text-info" type="submit" 
-            name="oldest" value="post">Newest</button>
-        <button class="btn text-info" type="submit" 
-            name="newest" value="post">Oldest</button>
-
     </form>
 </div>
 <!-- end of sort by form-->
@@ -42,7 +36,7 @@
             style="text-decoration:   none; color: black;" class="stretched-link">
             <div class="d-flex justify-content-between">
                 <h5>{{blog.category}}</h5>
-                <a href="{% url 'blogs:del_post' blog.id %}">
+                <a class="z-1" href="{% url 'blogs:del_post' blog.id %}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 8 8">
                     <path d="M1.41 0l-1.41 1.41.72.72 1.78 1.81-1.78 1.78-.72.69 1.41 1.44.72-.72 1.81-1.81 1.78 1.81.69.72 1.44-1.44-.72-.69-1.81-1.78 1.81-1.81.72-.72-1.44-1.41-.69.72-1.78 1.78-1.81-1.78-.72-.72z" />
                 </svg></a>
