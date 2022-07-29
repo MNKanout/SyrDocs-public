@@ -1,0 +1,10 @@
+{
+    "DATABASE_URL":"postgres://fxiqofalhnkstn:b6a03b2b731b12e691a950d5925216ed8cbc7dedeee3b536ac6d6a6c6f7ebb71@ec2-34-250-16-127.eu-west-1.compute.amazonaws.com:5432/d9fajtp6vqfpi0",
+    "DEBUG":"True",
+    "GOOGLE_APPLICATION_CREDENTIALS":"/app/google_conf/lucid-dynamo-329221-ea5b219d1a11.json",
+    "HOST":"hattie.db.elephantsql.com",
+    "NAME":"knjsqcfd",
+    "PASSWORD":"ywPC3WZA4uiWb982lwDOvlpEfMC960Jw",
+    "SECRET_KEY":"t3%h*sd(u_^_sew5=loz@y=_wef^+3j(qykcefq0q1q@%&^%#^",
+    "USER":"knjsqcfd"
+}
