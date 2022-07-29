@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "lucid-dynamo-329221",
+  "private_key_id": "ea5b219d1a11999c9e5cae4496383925afee1839",
+  "private_key": "-----BEGIN PRIVATE KEY-----MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDC24KhISvix9H+Sjn8HH30pj0qDkfzQDUeI1ke24hjou5hvyAnEKMe2pEjHnbTonU5H3B8D0PXfNJJb4CjNJpR264+hYFOAA+64pz4bL4/AvJ9RbTNVxOKo2C5Kj7BKBb6tI/Krpsj7fvaCvfjai6dWfw+7bQwHgTC7r/f9QMp6BT+hxXTAmpTnz9iE16Y18AWpIOJOzqxswIj7NLEYt0GgD9IjO25rnU77Qdav0yBTLhJ8i6fArBwbpwWhYWtgesfRpVb/Gj/EzzagdlFPQc1OAglw1Nl6QwTYBotq8jcn2WJ1jX3gvndICaiUUmW+3v5dx5JJgmAUSAQTvHAP/wJAgMBAAECggEAFICz1z/uBfPoAtVtEfuufiBCxcrQY8YxAJ2QCkjnqjIx2nuZhrq/qyasyFDziFOq+Wp3M7qIdSNHXh47HxERHsVaaW4zO5GSliOziAkrIGavPKKpwkRkBD2qFvmctkbBWjpG+fjSzp5DFn96c0WQJ5LZEYcB42E5N4iXDFnTriQz3kJfo4AQrEHwPd6drTdVEWie9awSZp4QO8+78K4+Z112Sq99eMFrja79g+MeBOZgHqD9qZnDBy5CXube6FQHU77bzsdZxNQT+GsIWWVIfnIZ7z7iqkPzjlxOlx/UO2rxoiFxw81iFTXZY0SxLJlJkqseNqsePWTnEVVR6o5GPQKBgQD2G/HUDM8r2OUNSNXNjDa8v+3B4pz35fhWFrLhoun2OYIOUlgdE5CWtqrhvswLVM/m6JaMCUrKLVHAUgANljKzRdwyXHfE2sCa3Ln1kaEis46ocW8QiMB0sR+yx/oUzONocqmzrQKyJF8Kmf6kIGVLs2ybRZWrXVLV9SjdqjuJLQKBgQDKsEVGwOljWbXciL+oY2D9qxcnlVXuRnkIVCwOr1Ok6QubGp1jbee7Ad1RtUhbNOGvFiiWbrjZwz70issaU4JG4jwn2p61wC+FSPw77iFqD98+5GcMpcPHEVNd8T9Y5L9DUVODDVxzPxm4utnH7n/oWMzhaRFsrgACBTsjIp+PzQKBgQCTeSVM4qwV4y9F6ZosRFPcgMnQv6E9rvFDbPCd4oh9wfIb8N3Z9opStXzqLvGH7Ldz73WezkahpcxyCPD9Mz6ITFlpWB1wuYBmi9NmwnAjIiNe7jIWX0ur4SNUdx507l1qjiMAhrCx3LeS27pJ0RvB4+81j9niyNZFXVWyljp8tQKBgEC/FDIo16UD+EMtb8PTkx0VNT1Qx/Voj6socDZ0rUyFoU53rwUfC6JCUzeRqD5yYxFyC58aWXQ+mXK2j3CmcnxAMqUsgfxfGw8BpIlkZUojLdZCUeTJYwPJNg9RTEISOELBzOKVNw4dfxLypTTnq/ZFv5TV4loMLzZ2A1ES81OVAoGAXvZXSGTHlLGCRY26QZn/95SrRyvAjgqUmzZWZYRFJMbBBIsBhOkGkju8w6B/fSaC1OCtyOscUrRJOZ9hTc3M2o+ua6Q4XhmGTsfBJfx3yCnmXBBiHOz9TrwMqwRdVGxxjJIdjp2lRbMaFoSCM1Ff9kysXgdF+PJTJR8SpYmv3y0=-----END PRIVATE KEY-----",
+  "client_email": "syrnote-translator@lucid-dynamo-329221.iam.gserviceaccount.com",
+  "client_id": "104910243117996649952",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/syrnote-translator%40lucid-dynamo-329221.iam.gserviceaccount.com"
+}

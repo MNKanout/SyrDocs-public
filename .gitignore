@@ -170,4 +170,3 @@ key.json
 static
 .gcloudignore
 app.yaml
-google_conf/
