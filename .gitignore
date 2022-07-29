@@ -161,13 +161,9 @@ win-venv/
 image.json
 =======
 image.json
+.idea
 >>>>>>> d38810d9e17a820fbec42957ec0187f032ee0565
 
 
 #extra
-key.json
-.env
 static
-.gcloudignore
-app.yaml
-google_conf/
