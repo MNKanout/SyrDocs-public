@@ -1,6 +1,11 @@
+'''Syrdocs settings'''
 import os
-import django_heroku
 import json
+import django_heroku
+
+class MissingConfigration(Exception):
+    '''Missing configration'''
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,8 +26,17 @@ CKEDITOR_CONFIGS = {
 # TinyMCE settings
 TINYMCE_DEFAULT_CONFIG = {
     "selector": "textarea",
-    "plugins": "export, pagebreak, code, emoticons, image, table, paste, lists, advlist, checklist, link, hr, charmap, directionality,table,spellchecker,paste,searchreplace,autoresize,directionality,export,fullpage",
-    "toolbar": "undo redo styleselect bold italic  toolbar alignleft aligncenter alignright forecolor backcolor linkimage fullpage export pagebreak | formatselect fontselect fontsizeselect bold italic underline strikethrough forecolor backcolor subscript superscript | alignleft aligncenter alignright alignjustify indent outdent rtl ltr | bullist numlist checklist | emoticons image table link hr charmap ",
+    "plugins": '''export, pagebreak, code, emoticons, image,
+    table, paste, lists,advlist, checklist, link, hr, charmap,
+    directionality,table,spellchecker,paste,searchreplace,autoresize,
+    directionality,export,fullpage''',
+    "toolbar": '''undo redo styleselect bold italic  toolbar alignleft
+    aligncenter alignright forecolor backcolor linkimage fullpage export pagebreak | 
+    formatselect fontselect fontsizeselect bold 
+    italic underline strikethrough forecolor backcolor subscript superscript | 
+    alignleft aligncenter alignright alignjustify indent outdent rtl ltr | 
+    bullist numlist checklist | 
+    emoticons image table link hr charmap''',
     "custom_undo_redo_levels": 10,
     "menubar": False,
     "browser_spellcheck": True,
@@ -88,7 +102,7 @@ django_heroku.settings(locals())
 
 # Get credentials from config file
 try:
-    with open("config.json") as f:
+    with open("config.json",encoding='utf-8') as f:
         data = json.load(f)
         print(data["NAME"])
         #Core
@@ -100,7 +114,6 @@ try:
             DEBUG = True
         else:
             DEBUG = False
-    
         # Database
         DATABASES = {
             'default': {
@@ -112,11 +125,11 @@ try:
                 'PORT': '5432',
             }
         }
-        
 # Get credentials from enviroment variables
-except:
-    print("No config file found, switching to enviroment variables")
+except FileNotFoundError as error:
     SECRET_KEY = os.environ.get('SECRET_KEY')
+    if not SECRET_KEY:
+        raise MissingConfigration('No project configration was found') from error
     debug = os.environ.get('DEBUG')
     if debug == "True":
         DEBUG = True
@@ -132,6 +145,8 @@ except:
             'PORT': '5432',
         }
     }
+
+
 
 
 
@@ -178,5 +193,3 @@ STATICFILES_DIRS = [
 
 #My settings
 LOGIN_URL = 'users:login'
-
-
