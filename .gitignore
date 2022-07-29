@@ -167,7 +167,7 @@ image.json
 #extra
 key.json
 .env
-/static
+static
 .gcloudignore
 app.yaml
 google_conf/
